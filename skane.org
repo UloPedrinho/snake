@@ -1,4 +1,23 @@
 #+TITLE: Snake
 #+DATE: [2020-07-05 Dom]
 
+* tools
+  - language: C++
+  - libraries: SFML
+* IDEAS [0/4]
+  - [ ] speed
+    - [ ] zones or objects
+      - hot/red faster
+      - cold/blue slower
+  - [ ] grow/decrease
+    - [ ] how to grow ? how many squares?
+    - [ ] drecease (?) how many squares?
+  - [ ] change direction
+  - [ ] break 
+    - "superpower" which can break tail, walls...
+* TODO classes pseudocode
+** TODO Game 
+** TODO Board
+** TODO Snake
+
 
