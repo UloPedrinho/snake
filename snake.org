@@ -4,7 +4,7 @@
 * tools
   - language: C++
   - libraries: SFML
-* IDEAS [0/4]
+* IDEAS [0/5]
   - [ ] speed
     - [ ] zones or objects
       - hot/red faster
@@ -15,6 +15,10 @@
   - [ ] change direction
   - [ ] break 
     - "superpower" which can break tail, walls...
+  - [ ] AI 
+    - [ ] random play
+    - [ ] trying to close the player
+
 * TODO classes pseudocode
 ** TODO Game 
 ** TODO Board
