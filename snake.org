@@ -19,9 +19,33 @@
     - [ ] random play
     - [ ] trying to close the player
 
-* TODO classes pseudocode
-** TODO Game 
-** TODO Board
-** TODO Snake
+* TODO 
+** STARTED classes
+   :LOGBOOK:
+   CLOCK: [2020-07-07 Mar 12:15]
+   :END:
+*** TODO Game class
+*** STARTED Board class
+    - [ ] unmark_cell is useful ??
+*** STARTED Snake class
+    - how the body grow: 
+      - when eat some special type of food the body must grow by one cell (or maybe more.. food...).
+      - when grow by eaten some special type of food:
+        - the tail not move from the last point.
+        - the current head point is added to the snake body, and so the body not move
+          - if grow more than 1 cell.. the body not move until 'growing' property be equal a 0
+    - [ ] use this or directly call vector size/begin/end methods ?
+      #+begin_src c++
+        int size;
+        Point start_pos;
+        Point end_pos;
+      #+end_src
+    - [X] Is the tail or the head which grow ? the head!!!
+    - [ ] use 'deque' better than 'vector'
+    - [ ] control limits board when grow
+    - [ ] 'generate' method actions: 
+      - [ ] control growing/decreasing state.
+      - [ ] advance every body Point when not growing/decreasing(?)
+** TODO comments in files and classes
 
 
