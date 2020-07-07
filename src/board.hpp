@@ -16,10 +16,4 @@ private:
   std::vector<std::vector<int>> grid;
 };
 
-#endif 
-
-
-
-
-
-
+#endif
