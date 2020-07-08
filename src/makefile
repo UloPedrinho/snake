@@ -1,5 +1,5 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = board.hpp debug.hpp helpers.hpp main.cpp
+OBJS = board.cpp debug.cpp helpers.hpp main.cpp
 
 #CC specifies which compiler we're using
 CC = g++

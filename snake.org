@@ -18,17 +18,19 @@
   - [ ] AI 
     - [ ] random play
     - [ ] trying to close the player
-
 * TODO 
 ** STARTED classes
    :LOGBOOK:
-   CLOCK: [2020-07-07 Mar 12:15]
+   CLOCK: [2020-07-07 Mar 12:15]--[2020-07-07 Mar 12:45] =>  0:30
    :END:
 *** TODO Game class
 *** STARTED Board class
     - [ ] unmark_cell is useful ??
 *** STARTED Snake class
+    - use a 'deque' for snake's body.
     - how the body grow: 
+      - snake grows by the head in the event direction
+      - when grows there's not movement
       - when eat some special type of food the body must grow by one cell (or maybe more.. food...).
       - when grow by eaten some special type of food:
         - the tail not move from the last point.
@@ -39,13 +41,18 @@
         int size;
         Point start_pos;
         Point end_pos;
+        deque body
       #+end_src
     - [X] Is the tail or the head which grow ? the head!!!
-    - [ ] use 'deque' better than 'vector'
+    - [X] use 'deque' better than 'vector'
+      - better performance in insert and remove operations; O(1)
     - [ ] control limits board when grow
     - [ ] 'generate' method actions: 
       - [ ] control growing/decreasing state.
       - [ ] advance every body Point when not growing/decreasing(?)
+*** TODO food
+    - [ ] when put food?
+*** TODO villians
 ** TODO comments in files and classes
 
 
