@@ -24,10 +24,12 @@
    CLOCK: [2020-07-07 Mar 12:15]--[2020-07-07 Mar 12:45] =>  0:30
    :END:
 *** TODO Game class
+    - [ ] when the snake is splitted must be put in the board as part of it.
+    - [ ] snake , last method call must be 'render()'
 *** STARTED Board class
+    - board origing(0,0) at North-West.
     - [ ] unmark_cell is useful ??
-*** STARTED Snake class
-    - use a 'deque' for snake's body.
+*** STARTED Snake class [7/9]
     - how the body grow: 
       - snake grows by the head in the event direction
       - when grows there's not movement
@@ -36,20 +38,35 @@
         - the tail not move from the last point.
         - the current head point is added to the snake body, and so the body not move
           - if grow more than 1 cell.. the body not move until 'growing' property be equal a 0
-    - [ ] use this or directly call vector size/begin/end methods ?
+    - [X] split body method
+    - [X] use this or directly call vector size/begin/end methods ?
       #+begin_src c++
         int size;
         Point start_pos;
         Point end_pos;
-        deque body
       #+end_src
+      - size variable is faster than call .size() method
+      - 'deque' .front() and .back() methods do the job
+    - [X] control limits board when grow
+      - wait to game control collision ?
+        - yes
+    - [X] snake moves to North, South, East and West
+    - [X] 'generate' method actions: 
+      - [X] control growing/decreasing(growing negative?) state.
+      - [X] advance every body Point when not growing/decreasing(?)
+        - not necessary. pop from back when moving/decreasing and do nothing when growing at back and push front
     - [X] Is the tail or the head which grow ? the head!!!
     - [X] use 'deque' better than 'vector'
       - better performance in insert and remove operations; O(1)
-    - [ ] control limits board when grow
-    - [ ] 'generate' method actions: 
-      - [ ] control growing/decreasing state.
-      - [ ] advance every body Point when not growing/decreasing(?)
+      - first 'deque' elemnt is the head
+      - last 'deque' element is the tail
+    - [ ] refactor:
+      - [ ] create direction function (?) (look at front and back)
+    - [-] test
+      # [2020-07-09 Thr 13:43]
+      - [X] constructor
+      - [ ] .render
+      - [X] .get
 *** TODO food
     - [ ] when put food?
 *** TODO villians

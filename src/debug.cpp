@@ -7,3 +7,10 @@ void debug_board_printBoard(const std::vector<std::vector<int>> &grid){
     std::cout << "\n";
   }
 }
+
+void debug_snake_printPoints(const std::deque<Point> &snake) {
+  std::cout << "size: " << snake.size() << "\n";
+  for(const Point &p : snake)
+    std::cout << "(" << p.x << "," << p.y << ") ";
+  std::cout << "\n";
+}

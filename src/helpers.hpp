@@ -6,4 +6,6 @@ struct Point{
   int y;
 };
 
+enum class Direction{North, South, East, West};
+
 #endif /* HELPERS_HPP */
