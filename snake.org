@@ -1,10 +1,11 @@
 #+TITLE: Snake
 #+DATE: [2020-07-05 Dom]
+#+TODO: CURRENT(c!) STARTED(s!) WAITING(w!) TODO(t!) TEST(e!) BUG(b!) | DONE(d!) FIXED(f!)
 
 * tools
   - language: C++
   - libraries: SFML
-* IDEAS [0/5]
+* IDEAS [0/6]
   - [ ] speed
     - [ ] zones or objects
       - hot/red faster
@@ -12,24 +13,44 @@
   - [ ] grow/decrease
     - [ ] how to grow ? how many squares?
     - [ ] drecease (?) how many squares?
-  - [ ] change direction
+  - [ ] change direction keys
+  - [ ] change head for tail (?)
   - [ ] break 
     - "superpower" which can break tail, walls...
   - [ ] AI 
     - [ ] random play
     - [ ] trying to close the player
 * TODO 
+** TODO general [1/1]
+   - [X] cordinates.. inverse.. 
+     - solution:
+       - use cartesian cordinates
+       - paint function convert
+** TODO graphics [0/1]
+   :LOGBOOK:
+   - State "TODO"       from              [2020-07-10 Ven 17:14]
+   :END:
+*** TODO render
+    :LOGBOOK:
+    - State "TODO"       from              [2020-07-10 Ven 17:14]
+    :END:
+    - [ ] render separatily or all in one ?
 ** STARTED classes
    :LOGBOOK:
    CLOCK: [2020-07-07 Mar 12:15]--[2020-07-07 Mar 12:45] =>  0:30
    :END:
 *** TODO Game class
     - [ ] when the snake is splitted must be put in the board as part of it.
-    - [ ] snake , last method call must be 'render()'
+      - [ ] snake method? or in game class(with a member returning the data )?
+    - [ ] snake , .render() and then .getSnake()
 *** STARTED Board class
     - board origing(0,0) at North-West.
     - [ ] unmark_cell is useful ??
-*** STARTED Snake class [7/9]
+    - [ ] use a enum (class?) for board values
+*** DONE Snake class [9/9]
+    :LOGBOOK:
+    - State "DONE"       from "STARTED"    [2020-07-10 Ven 21:19]
+    :END:
     - how the body grow: 
       - snake grows by the head in the event direction
       - when grows there's not movement
@@ -60,14 +81,15 @@
       - better performance in insert and remove operations; O(1)
       - first 'deque' elemnt is the head
       - last 'deque' element is the tail
-    - [ ] refactor:
-      - [ ] create direction function (?) (look at front and back)
-    - [-] test
+    - [X] refactor:
+      - [X] create direction function (?) (look at front and back)
+        not possible. constructor  push at front, .render() push at back
+    - [X] test
       # [2020-07-09 Thr 13:43]
       - [X] constructor
-      - [ ] .render()
+      - [X] .render()
       - [X] .get()
-      - [ ] .split()
+      - [X] .split()
 *** TODO food
     - [ ] when put food?
 *** TODO villians
