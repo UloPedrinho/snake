@@ -4,8 +4,7 @@
 Board::Board(int width, int height, int init_value) {
   w = width;
   h = height;
-  grid.resize(h, std::vector<int> (w));
-  // TODO: init 
+  grid.resize(h, std::vector<int> (w, init_value));
 }
 std::vector<std::vector<int>> Board::getBoard() const { return grid; }
 
