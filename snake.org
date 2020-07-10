@@ -65,8 +65,9 @@
     - [-] test
       # [2020-07-09 Thr 13:43]
       - [X] constructor
-      - [ ] .render
-      - [X] .get
+      - [ ] .render()
+      - [X] .get()
+      - [ ] .split()
 *** TODO food
     - [ ] when put food?
 *** TODO villians
