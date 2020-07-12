@@ -1,3 +1,4 @@
+#include "game.hpp"
 #include "board.hpp"
 #include "snake.hpp"
 #include "debug.hpp"
@@ -5,16 +6,11 @@
 
 int main()
 {
-  Board board(5,5,-1);
+  // Board board(10,5,0);
+  // Snake snake(3, 7, Point{3,3}, Direction::East);
 
-  Point a{1, 2};
-
-  board.mark_cell(a, 1);
-  board.mark_cell(Point{4, 4}, 5);
-  debug_board_printBoard(board.getBoard());
-
-  Snake snake(3, Point{3,3}, Direction::East);
-  debug_snake_printPoints(snake.get());
+  Game game;
+  game.run();
 
   return 0;
 }

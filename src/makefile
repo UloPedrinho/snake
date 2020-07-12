@@ -1,5 +1,5 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = board.cpp snake.cpp debug.cpp helpers.hpp main.cpp
+OBJS = game.cpp board.cpp snake.cpp debug.cpp helpers.cpp main.cpp
 
 #CC specifies which compiler we're using
 CC = g++
@@ -9,8 +9,7 @@ CC = g++
 #COMPILER_FLAGS = -w
 
 #LINKER_FLAGS specifies the libraries we're linking against
-#LINKER_FLAGS = -lSDL2 -lSDL2_image
-LINKER_FLAGS =
+LINKER_FLAGS = -lsfml-window -lsfml-graphics -lsfml-system
 
 #OBJ_NAME specifies the name of our exectuable
 OBJ_NAME = main

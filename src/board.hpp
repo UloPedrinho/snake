@@ -6,9 +6,14 @@
 
 class Board {
 public:
+  Board() {};
   Board(int width, int height, int init_value);
+  void setup(int width, int height, int init_value);
+  int getWidth() {return w;};
+  int getHeight() {return h;};
   void mark_cell(Point point, int value);
   void unmark_cell(Point point, int value);
+
   std::vector<std::vector<int>> getBoard() const;
 private:
   int w;
