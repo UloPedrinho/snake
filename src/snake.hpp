@@ -1,12 +1,14 @@
-#ifndef SNAKE_HPP
-#define SNAKE_HPP
+#ifndef SNAKE_HPP_
+#define SNAKE_HPP_
 
 #include "helpers.hpp"
 #include <deque>
 
 class Snake {
 public:
+  Snake () {};
   Snake(int initial_size, int full_size, Point initial_head_position, Direction initial_direction);
+  void setup(int initial_size, int full_size, Point initial_head_position, Direction initial_direction);
   void grow(int size);
   void move(Direction dir);
   void split();

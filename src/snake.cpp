@@ -1,6 +1,11 @@
 #include "snake.hpp"
 
 Snake::Snake(int initial_size, int full_size, Point initial_head_position, Direction initial_direction){
+  setup(initial_size, full_size, initial_head_position, initial_direction);
+}
+
+void Snake::setup(int initial_size, int full_size, Point initial_head_position, Direction initial_direction) {
+
   size = initial_size;
   init_size = initial_size;
   full_size = limit_size;

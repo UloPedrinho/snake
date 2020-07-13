@@ -16,10 +16,10 @@ private:
   void render();
 private:
   Board board;
-  // Snake snake;
+  Snake snake;
   sf::RenderWindow window;
   sf::VertexArray cell_points;
-
+  std::vector<sf::RectangleShape> snake_body;
   sf::VertexArray grid;         // FIXME
 };
 
