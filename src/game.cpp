@@ -2,11 +2,11 @@
 #include <iostream>
 
 Game::Game() {
-  board.setup(100, 100, 0);
-  snake.setup(5, 20, {30,23}, Direction::North);
+  board.setup(30, 30, 0);
+  snake.setup(7, 20, {14,14}, Direction::East);
 
   window.create(sf::VideoMode(400,400), "snake", sf::Style::Resize); // FIXME: video mode and title ;;
-  window.setFramerateLimit(60); // FIXME:  https://www.sfml-dev.org/tutorials/2.5/window-window.ph
+  window.setFramerateLimit(1); // FIXME:  https://www.sfml-dev.org/tutorials/2.5/window-window.ph
 
   cell_points = cellsPoints(window.getSize(), sf::Vector2i {board.getWidth(),board.getHeight()});
 
@@ -59,12 +59,12 @@ void Game::update() {
 }
 
 void Game::render() {
-  renderGrid(grid, window.getSize(), sf::Vector2i {board.getWidth(),board.getHeight()});
+  //  renderGrid(grid, window.getSize(), sf::Vector2i {board.getWidth(),board.getHeight()});
   renderSnake(snake_body, cell_points, snake.getSnake());
 }
 
 void Game::draw() {
-  window.draw(grid);
+  //  window.draw(grid);
   for (int i = 0; i < snake_body.size(); ++i) {
     window.draw(snake_body[i]);
   }
