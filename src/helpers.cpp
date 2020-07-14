@@ -35,8 +35,7 @@ sf::VertexArray cellsPoints(const sf::Vector2u window_size, const sf::Vector2i b
   return origins;
 }
 
-void renderSnake(std::vector<sf::RectangleShape>& body, const sf::VertexArray& origins, const std::deque<Point> snake) {
-
+void renderSnake(std::vector<sf::RectangleShape>& body, const sf::VertexArray& origins, const std::deque<Point> snake, const sf::Vector2i board_size) {
   sf::RectangleShape cell;
   int cell_pos;
   float cell_size = origins[0].position.x - origins[1].position.y; // FIXME: not clean solution. width and height the same??
@@ -45,14 +44,8 @@ void renderSnake(std::vector<sf::RectangleShape>& body, const sf::VertexArray& o
 
   for (int i  = 0 ; i < snake.size(); ++i) {
 
-    cell_pos = snake[i].y + snake[i].x*10; // FIXME!! 10?? not scalar grrr
-                                           // FIXME reversed cordinates, snake class...etc
-    std::cout << "["<< i <<"]" << "\n";
-    std::cout <<"  snake: (" << snake[i].x <<"," << snake[i].y << ")";
-    std::cout << " :: " << cell_pos   << "\n";
-    std::cout <<"  origi: (" << origins[cell_pos].position.x <<",";
-    std::cout << origins[cell_pos].position.y   << "\n";
-    
+    cell_pos = snake[i].y + snake[i].x*board_size.x;  // FIXME reversed cordinates, snake class...etc
+
     cell.setSize(sf::Vector2f(cell_size, cell_size)); // FIXME
     cell.setPosition(origins[cell_pos].position);
 

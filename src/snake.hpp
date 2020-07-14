@@ -13,6 +13,7 @@ public:
   void move(Direction dir);
   void split();
   void render();                // generate current snake body
+  Direction getDirection() const {return direction;};
   std::deque<Point> getSnake() const { return body; };
 private:
   int size;

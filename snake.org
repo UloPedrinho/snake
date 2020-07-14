@@ -24,7 +24,7 @@
     - snake size..etc
 ** next version
    - [ ] use struct to board ?
-* TODO [1/4]
+* TODO [1/5]
 ** DONE general [1/1]
    :LOGBOOK:
    - State "DONE"       from "TODO"       [2020-07-10 Ven 21:20]
@@ -33,21 +33,42 @@
      - solution:
        - use cartesian cordinates
        - paint function convert
-** TODO graphics [0/1]
+** STARTED graphics [1/2]
    :LOGBOOK:
+   - State "STARTED"    from "TODO"       [2020-07-14 Mar 10:17]
    - State "TODO"       from              [2020-07-10 Ven 17:14]
    :END:
-*** TODO render
+*** DONE snake [3/3] 
+    :LOGBOOK:
+    - State "DONE"       from "TODO"       [2020-07-14 Mar 10:20]
+    :END:
+    - State "TODO"       from              [2020-07-14 Mar 10:08]
+    - [X] move
+      - [X] not move in inverse direction
+    - [X] grow
+    - [X] split
+*** STARTED render [3/4]
     :LOGBOOK:
     - State "TODO"       from              [2020-07-10 Ven 17:14]
     :END:
-    - [ ] render separatily or all in one ?
+    - [X] render separatily or all in one ?
+      - separatily!
+    - [X] render grid
+    - [X] render snake
+    - [ ] render food
+
+** TODO control colissions
+   :LOGBOOK:
+   - State "TODO"       from              [2020-07-14 Mar 10:18]
+   :END:
+   - [ ] board limit
+   - [ ] snake with itself
 ** STARTED classes
    :LOGBOOK:
    CLOCK: [2020-07-10 Ven 12:21]--[2020-07-10 Ven 13:45] =>  1:24
    CLOCK: [2020-07-07 Mar 12:15]--[2020-07-07 Mar 12:45] =>  0:30
    :END:
-*** CURRENT Game class [0/6]
+*** CURRENT Game class [2/7]
     :LOGBOOK:
     CLOCK: [2020-07-10 Ven 23:25]--[2020-07-10 Ven 23:34] =>  0:09
     - State "CURRENT"    from "TODO"       [2020-07-10 Ven 23:06]
@@ -56,10 +77,10 @@
     - [ ] .update()
     - [ ] .render()
     - [ ] .run()
-    - [ ] grid
+    - [X] grid
     - [ ] when the snake is splitted must be put in the board as part of it.
       - [ ] snake method? or in game class(with a member returning the data )?
-    - [ ] snake , .render() and then .getSnake()
+    - [X] snake , .render() and then .getSnake()
 *** STARTED Board class
     - board origing(0,0) at North-West.
     - [ ] unmark_cell is useful ??
@@ -109,5 +130,6 @@
       - [X] constructor
       - [X] .render()
       - [X] .get()
+      - [X] .grow()
       - [X] .split()
 ** TODO comments in files and classes

@@ -16,7 +16,7 @@ enum class Direction{North, South, East, West};
 sf::VertexArray cellsPoints(const sf::Vector2u window_size, const sf::Vector2i board_size);
 
 void renderGrid(sf::VertexArray& grid, sf::Vector2u window_size, const sf::Vector2i board_size);
-void renderSnake(std::vector<sf::RectangleShape>& body, const sf::VertexArray& origins, const std::deque<Point> snake);
+void renderSnake(std::vector<sf::RectangleShape>& body, const sf::VertexArray& origins, const std::deque<Point> snake, const sf::Vector2i board_size);
 
 
 #endif /* HELPERS_HPP */
