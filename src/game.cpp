@@ -2,7 +2,7 @@
 #include <iostream>
 
 Game::Game() {
-  board.setup(100, 100, 0);
+  board.setup(100, 100, Cell::Empty);
   snake.setup(7, 20, {14,14}, Direction::East);
 
   window.create(sf::VideoMode(400,400), "snake", sf::Style::Resize); // FIXME: video mode and title ;;

@@ -12,6 +12,8 @@ struct Point{
 
 enum class Direction{North, South, East, West};
 
+enum class Cell{Empty, Snake, Grow, Split};
+
 // draw functions
 sf::VertexArray cellsPoints(const sf::Vector2u window_size, const sf::Vector2i board_size);
 

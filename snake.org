@@ -81,10 +81,17 @@
     - [ ] when the snake is splitted must be put in the board as part of it.
       - [ ] snake method? or in game class(with a member returning the data )?
     - [X] snake , .render() and then .getSnake()
-*** STARTED Board class
+*** CURRENT Board class [2/4]
+    :LOGBOOK:
+    - State "CURRENT"    from "STARTED"    [2020-07-14 Mar 10:31]
+    :END:
     - board origing(0,0) at North-West.
-    - [ ] unmark_cell is useful ??
-    - [ ] use a enum (class?) for board values
+    - [X] unmark_cell is useful ??
+      - not. only mark_cell. to clean put Cell::Empty enum
+    - [X] use a enum (class?) for board values
+    - [ ] represent snake on board ?
+    - [ ] put food in board?
+      - yes, so we can't control if cells are used.
 *** TODO food
     - [ ] when put food?
 *** TODO villians

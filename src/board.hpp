@@ -7,18 +7,17 @@
 class Board {
 public:
   Board() {};
-  Board(int width, int height, int init_value);
-  void setup(int width, int height, int init_value);
+  Board(int width, int height, Cell init_value);
+  void setup(int width, int height, Cell init_value);
   int getWidth() {return w;};
   int getHeight() {return h;};
-  void mark_cell(Point point, int value);
-  void unmark_cell(Point point, int value);
+  void mark_cell(Point point, Cell value);
 
-  std::vector<std::vector<int>> getBoard() const;
+  std::vector<std::vector<Cell>> getBoard() const;
 private:
   int w;
   int h;
-  std::vector<std::vector<int>> grid;
+  std::vector<std::vector<Cell>> grid;
 };
 
 #endif
