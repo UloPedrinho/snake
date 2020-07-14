@@ -28,7 +28,23 @@ void Snake::setup(int initial_size, int full_size, Point initial_head_position, 
 
 void Snake::grow(int size){ growing += size; }
 void Snake::move(Direction dir){ direction = dir; }
-void Snake::split(){ body.resize(init_size); }
+bool Snake::getSplitted() const {return splitted;}
+void Snake::toggleSplit() {
+  std::cout <<"\n" << body.size() << ",, " << size << ",, " << growing << "\n";
+  if (body.size() != init_size) {
+    if (splitted == true)
+      splitted = false;
+    else
+      splitted = true;
+  }
+}
+
+void Snake::split(){
+  body.resize(init_size);
+  size = init_size;
+  splitted = false;
+}
+
 void Snake::render() {
   // head
   if(direction == Direction::North){

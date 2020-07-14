@@ -2,12 +2,16 @@
 #include <iostream>
 
 Game::Game() {
-  board.setup(100, 100, Cell::Empty);
-  snake.setup(7, 20, {14,14}, Direction::East);
+  // init game data
+  board.setup(30, 30, Cell::Empty);
+  snake.setup(3, 20, {5,5}, Direction::East);
+  food.units = food.current = 3; // FIXME
 
+  // create window
   window.create(sf::VideoMode(400,400), "snake", sf::Style::Resize); // FIXME: video mode and title ;;
-  window.setFramerateLimit(10); // FIXME:  https://www.sfml-dev.org/tutorials/2.5/window-window.ph
+  window.setFramerateLimit(2); // FIXME:  https://www.sfml-dev.org/tutorials/2.5/window-window.ph
 
+  // generate cells points(top-left)
   cell_points = cellsPoints(window.getSize(), sf::Vector2i {board.getWidth(),board.getHeight()});
 
 }
@@ -57,7 +61,7 @@ void Game::events() {
         break;
       }
       case sf::Keyboard::S: {
-        snake.split();
+        snake.toggleSplit();
         break;
       }
 
@@ -69,7 +73,26 @@ void Game::events() {
 }
 
 void Game::update() {
+  std::deque<Point> old_snake = snake.getSnake();
+
+  // TODO test collisions..etc
   snake.render();
+  // put snake into board
+  // FIXME: good solution?
+  if (snake.getSplitted()) { // snake is to be splitted
+    snake.split();
+    board.putElement(old_snake, Cell::Wall);
+  } else
+    board.putElement(old_snake, Cell::Empty);
+
+  // generate current snake
+
+
+  board.putElement(snake.getSnake(), Cell::Body);
+
+  // begin-DEBUG
+  debug_board_printBoard(board.getBoard());
+  // end-DEBUG
 }
 
 void Game::render() {

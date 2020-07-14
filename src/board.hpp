@@ -11,6 +11,8 @@ public:
   void setup(int width, int height, Cell init_value);
   int getWidth() {return w;};
   int getHeight() {return h;};
+  void putElement(std::deque<Point> element, Cell value);
+  void putElement(Point element, Cell value);
   void mark_cell(Point point, Cell value);
 
   std::vector<std::vector<Cell>> getBoard() const;

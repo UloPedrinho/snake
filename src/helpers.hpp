@@ -10,9 +10,18 @@ struct Point{
   int y;
 };
 
-enum class Direction{North, South, East, West};
+struct Food {
+  int units;
+  int current;
+};
 
-enum class Cell{Empty, Snake, Grow, Split};
+enum class Direction {
+  North,
+  South,
+  East,
+  West
+};
+enum class Cell{Empty, Wall, Head, Body, Grow, Split};
 
 // draw functions
 sf::VertexArray cellsPoints(const sf::Vector2u window_size, const sf::Vector2i board_size);
