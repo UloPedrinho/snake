@@ -51,7 +51,7 @@
       - [X] not move in inverse direction
     - [X] grow
     - [X] split
-*** STARTED render [3/4]
+*** STARTED render [4/7]
     :LOGBOOK:
     - State "TODO"       from              [2020-07-10 Ven 17:14]
     :END:
@@ -59,7 +59,11 @@
       - separatily!
     - [X] render grid
     - [X] render snake
+    - [X] render walls
     - [ ] render food
+    - [ ] unify renders ,,snake and walls are the same
+    - [ ] use a enum for colors associating Cell
+
 *** TODO update [/]
     :LOGBOOK:
     - State "TODO"       from              [2020-07-14 Mar 12:41]

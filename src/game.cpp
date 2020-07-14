@@ -5,7 +5,7 @@ Game::Game() {
   // init game data
   board.setup(30, 30, Cell::Empty);
   snake.setup(3, 20, {5,5}, Direction::East);
-  food.units = food.current = 3; // FIXME
+  food.units = food.current = 1; // FIXME
 
   // create window
   window.create(sf::VideoMode(400,400), "snake", sf::Style::Resize); // FIXME: video mode and title ;;
@@ -80,14 +80,13 @@ void Game::update() {
   // put snake into board
   // FIXME: good solution?
   if (snake.getSplitted()) { // snake is to be splitted
-    snake.split();
     board.putElement(old_snake, Cell::Wall);
+    board.putElement(old_snake.back(), Cell::Empty);
+    snake.split();
   } else
     board.putElement(old_snake, Cell::Empty);
 
   // generate current snake
-
-
   board.putElement(snake.getSnake(), Cell::Body);
 
   // begin-DEBUG
@@ -98,12 +97,28 @@ void Game::update() {
 void Game::render() {
   renderGrid(grid, window.getSize(), sf::Vector2i {board.getWidth(),board.getHeight()});
   renderSnake(snake_body, cell_points, snake.getSnake(), sf::Vector2i {board.getWidth(),board.getHeight()});
+  renderWalls(walls, cell_points, board.getElementPoints(Cell::Wall), sf::Vector2i {board.getWidth(),board.getHeight()});
+
 }
 
 void Game::draw() {
-   window.draw(grid);
+  window.draw(grid);
+
+  // better sometipe of sfml array?? and not loop
   for (int i = 0; i < snake_body.size(); ++i) {
     window.draw(snake_body[i]);
   }
+
+
+
+  for (int i = 0; i < walls.size(); ++i) {
+    window.draw(walls[i]);
+  }
+
+
+
+
+
+
   // window.draw(cell_points);
 }

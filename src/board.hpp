@@ -3,6 +3,7 @@
 
 #include "helpers.hpp"
 #include <vector>
+#include <deque>
 
 class Board {
 public:
@@ -14,8 +15,8 @@ public:
   void putElement(std::deque<Point> element, Cell value);
   void putElement(Point element, Cell value);
   void mark_cell(Point point, Cell value);
-
   std::vector<std::vector<Cell>> getBoard() const;
+  std::vector<Point> getElementPoints(Cell element) const;
 private:
   int w;
   int h;

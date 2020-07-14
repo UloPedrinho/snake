@@ -16,9 +16,23 @@ void Board::putElement(std::deque<Point> element, Cell value) {
     mark_cell(element[i], value);
   }
 }
-
+void Board::putElement(Point p, Cell value){
+  mark_cell(p, value);
+}
 
 std::vector<std::vector<Cell>> Board::getBoard() const { return grid; }
+
+std::vector<Point> Board::getElementPoints(Cell element) const {
+  std::vector<Point> points;
+
+  for (int i = 0; i < w; ++i)
+    for (int j = 0; j < h; ++j)
+      if(grid[i][j] == element)
+        points.push_back({i,j});
+
+  return points;
+}
+
 
 void Board::mark_cell(Point p, Cell v) {
   grid[p.x][p.y] = v;

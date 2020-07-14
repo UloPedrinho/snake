@@ -28,6 +28,6 @@ sf::VertexArray cellsPoints(const sf::Vector2u window_size, const sf::Vector2i b
 
 void renderGrid(sf::VertexArray& grid, sf::Vector2u window_size, const sf::Vector2i board_size);
 void renderSnake(std::vector<sf::RectangleShape>& body, const sf::VertexArray& origins, const std::deque<Point> snake, const sf::Vector2i board_size);
-
+void renderWalls(std::vector<sf::RectangleShape>& walls, const sf::VertexArray& origins,  const std::vector<Point> points, const sf::Vector2i board_size);
 
 #endif /* HELPERS_HPP */

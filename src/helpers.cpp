@@ -59,3 +59,20 @@ void renderSnake(std::vector<sf::RectangleShape>& body, const sf::VertexArray& o
     body.push_back(cell);
   }
 }
+
+void renderWalls(std::vector<sf::RectangleShape>& walls, const sf::VertexArray& origins,  const std::vector<Point> points, const sf::Vector2i board_size){
+  sf::RectangleShape cell;
+  int cell_pos;
+  float cell_size = origins[0].position.x - origins[1].position.y; // FIXME: refactor code,repeated in reders functions
+  walls.clear();
+  for (int i = 0; i < points.size(); ++i) {
+    cell_pos = points[i].y +
+               points[i].x *
+                   board_size.x; // FIXME reversed cordinates, snake class...etc
+    cell.setSize(sf::Vector2f(cell_size, cell_size)); // FIXME
+    cell.setPosition(origins[cell_pos].position);
+    cell.setFillColor(sf::Color::Magenta);
+    walls.push_back(cell);
+  }
+}
+

@@ -30,7 +30,6 @@ void Snake::grow(int size){ growing += size; }
 void Snake::move(Direction dir){ direction = dir; }
 bool Snake::getSplitted() const {return splitted;}
 void Snake::toggleSplit() {
-  std::cout <<"\n" << body.size() << ",, " << size << ",, " << growing << "\n";
   if (body.size() != init_size) {
     if (splitted == true)
       splitted = false;

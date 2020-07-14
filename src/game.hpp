@@ -23,6 +23,7 @@ private:
   sf::RenderWindow window;
   sf::VertexArray cell_points;
   std::vector<sf::RectangleShape> snake_body;
+  std::vector<sf::RectangleShape> walls;
   sf::VertexArray grid;         // FIXME
 };
 
