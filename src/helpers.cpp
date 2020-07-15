@@ -21,11 +21,10 @@ void generateRandomElement(Items& element, const std::vector<std::vector<Cell>> 
       element.points.push_back({randomX, randomY});
       ++element.current;
       ++counter;
-      std::cout << "Element: "<< element.points.size() << "\n";
-      std::cout << " -- " << randomX << "," << randomY << "\n";
+      // std::cout << "Element: "<< element.points.size() << "\n";
+      // std::cout << " -- " << randomX << "," << randomY << "\n";
     }
   }
-
 }
 
 void renderGrid(sf::VertexArray& grid, sf::Vector2u window_size, const sf::Vector2i board_size){

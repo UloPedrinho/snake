@@ -3,9 +3,9 @@
 
 Game::Game() {
   // init game data
-  board.setup(40, 40, Cell::Empty);
+  board.setup(80, 80, Cell::Empty);
   snake.setup(3, 20, {20,20}, Direction::East);
-  grow.units = 7;
+  grow.units = 32;
   grow.current = 0;
   grow.type = Cell::Grow;
   generateRandomElement(grow, board.getBoard(), sf::Vector2i {board.getWidth(),board.getHeight()});
@@ -13,7 +13,7 @@ Game::Game() {
 
   // create window
   window.create(sf::VideoMode(400,400), "snake", sf::Style::Resize); // FIXME: video mode and title ;;
-  window.setFramerateLimit(10); // FIXME:  https://www.sfml-dev.org/tutorials/2.5/window-window.ph
+  window.setFramerateLimit(20); // FIXME:  https://www.sfml-dev.org/tutorials/2.5/window-window.ph
 
   // generate cells points(top-left)
   cell_points = cellsPoints(window.getSize(), sf::Vector2i {board.getWidth(),board.getHeight()});
@@ -94,7 +94,7 @@ void Game::update() {
   board.putElement(snake.getSnake(), Cell::Body);
 
   // begin-DEBUG
-  debug_board_printBoard(board.getBoard());
+  // debug_board_printBoard(board.getBoard());
   // end-DEBUG
 }
 
@@ -111,7 +111,8 @@ void Game::render() {
 void Game::draw() {
   // window.draw(grid);
 
-  // better sometipe of sfml array?? and not loop
+  // FIXME: make a function
+  //        better sometipe of sfml array?? and not loop
   for (int i = 0; i < snake_body.size(); ++i) {
     window.draw(snake_body[i]);
   }
@@ -121,8 +122,4 @@ void Game::draw() {
  for (int i = 0; i < food.size(); ++i) {
     window.draw(food[i]);
   }
-
-
-
-  // window.draw(cell_points);
 }

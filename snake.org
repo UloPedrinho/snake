@@ -65,6 +65,7 @@
       - food, villians, etc..
       - [X] put random elements into board function
       - [ ] remove element from board function
+        - use vector .erase() method
       - [ ] render items with snake on board
     - [ ] unify renders ,,snake and walls are the same
     - [ ] use a enum for colors associating Cell
@@ -169,7 +170,13 @@
       - [X] .grow()
       - [X] .split()
 ** TODO comments in files and classes
-* BUGS [0/1]
+   - [ ] put comments
+   - [ ] clear debug couts
+* FIXES [0/2]
+  - [ ] [[file:src/game.cpp::window.setFramerateLimit(20); // FIXME: https://www.sfml-dev.org/tutorials/2.5/window-window.ph]]
+  - [ ] [[file:src/game.cpp::// FIXME: make a function][draw function for repeated loops]]
+
+* BUGS [0/2]
 ** TODO #001 , horizontal split and snake horizontal move delete other lines
         - this behavior was watched only one time.. 
 ** TODO #002 , cordinates with 0, are not showed. it's like start in 1
