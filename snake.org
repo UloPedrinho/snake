@@ -1,6 +1,6 @@
 #+TITLE: Snake
 #+DATE: [2020-07-05 Dom]
-#+TODO: CURRENT(c!) STARTED(s!) WAITING(w!) TODO(t!) TEST(e!) BUG(b!) | DONE(d!) FIXED(f!)
+#+TODO: CURRENT(c!) STARTED(s!) WAITING(w!) TODO(t!) TEST(e!) BUGS(b!) | DONE(d!) FIXED(f!)
 
 * tools
   - language: C++
@@ -51,8 +51,9 @@
       - [X] not move in inverse direction
     - [X] grow
     - [X] split
-*** STARTED render [4/7]
+*** CURRENT render [4/7]
     :LOGBOOK:
+    - State "CURRENT"    from "STARTED"    [2020-07-15 Mér 10:37]
     - State "TODO"       from              [2020-07-10 Ven 17:14]
     :END:
     - [X] render separatily or all in one ?
@@ -60,7 +61,11 @@
     - [X] render grid
     - [X] render snake
     - [X] render walls
-    - [ ] render food
+    - [-] render items
+      - food, villians, etc..
+      - [X] put random elements into board function
+      - [ ] remove element from board function
+      - [ ] render items with snake on board
     - [ ] unify renders ,,snake and walls are the same
     - [ ] use a enum for colors associating Cell
 
@@ -164,3 +169,9 @@
       - [X] .grow()
       - [X] .split()
 ** TODO comments in files and classes
+* BUGS [0/1]
+** TODO #001 , horizontal split and snake horizontal move delete other lines
+        - this behavior was watched only one time.. 
+** TODO #002 , cordinates with 0, are not showed. it's like start in 1
+        - renderElements(food, cell_points, {{0, 0}, {1, 5}}, sf::Color::Yellow,
+                        sf::Vector2i{board.getWidth(), board.getHeight()});

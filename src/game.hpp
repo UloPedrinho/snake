@@ -19,12 +19,11 @@ private:
 private:
   Board board;
   Snake snake;
-  Food food;
+  Items grow;
   sf::RenderWindow window;
   sf::VertexArray cell_points;
   std::vector<sf::RectangleShape> snake_body;
   std::vector<sf::RectangleShape> walls;
+  std::vector<sf::RectangleShape> food ;
   sf::VertexArray grid;         // FIXME
 };
-
-

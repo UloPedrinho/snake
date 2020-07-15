@@ -3,13 +3,17 @@
 
 Game::Game() {
   // init game data
-  board.setup(30, 30, Cell::Empty);
-  snake.setup(3, 20, {5,5}, Direction::East);
-  food.units = food.current = 1; // FIXME
+  board.setup(40, 40, Cell::Empty);
+  snake.setup(3, 20, {20,20}, Direction::East);
+  grow.units = 7;
+  grow.current = 0;
+  grow.type = Cell::Grow;
+  generateRandomElement(grow, board.getBoard(), sf::Vector2i {board.getWidth(),board.getHeight()});
+
 
   // create window
   window.create(sf::VideoMode(400,400), "snake", sf::Style::Resize); // FIXME: video mode and title ;;
-  window.setFramerateLimit(2); // FIXME:  https://www.sfml-dev.org/tutorials/2.5/window-window.ph
+  window.setFramerateLimit(10); // FIXME:  https://www.sfml-dev.org/tutorials/2.5/window-window.ph
 
   // generate cells points(top-left)
   cell_points = cellsPoints(window.getSize(), sf::Vector2i {board.getWidth(),board.getHeight()});
@@ -95,28 +99,28 @@ void Game::update() {
 }
 
 void Game::render() {
-  renderGrid(grid, window.getSize(), sf::Vector2i {board.getWidth(),board.getHeight()});
+  // renderGrid(grid, window.getSize(), sf::Vector2i {board.getWidth(),board.getHeight()});
   renderSnake(snake_body, cell_points, snake.getSnake(), sf::Vector2i {board.getWidth(),board.getHeight()});
-  renderWalls(walls, cell_points, board.getElementPoints(Cell::Wall), sf::Vector2i {board.getWidth(),board.getHeight()});
+  renderElements(walls, cell_points, board.getElementPoints(Cell::Wall), sf::Color::Magenta, sf::Vector2i {board.getWidth(),board.getHeight()});
+  renderElements(food, cell_points, grow.points, sf::Color::Yellow, sf::Vector2i {board.getWidth(),board.getHeight()});
 
+  // renderElements(food, cell_points, {{1, 1}, {3,3}}, sf::Color::Yellow,    // FIXME: DEBUG , to be deleted
+  //                sf::Vector2i{board.getWidth(), board.getHeight()});
 }
 
 void Game::draw() {
-  window.draw(grid);
+  // window.draw(grid);
 
   // better sometipe of sfml array?? and not loop
   for (int i = 0; i < snake_body.size(); ++i) {
     window.draw(snake_body[i]);
   }
-
-
-
   for (int i = 0; i < walls.size(); ++i) {
     window.draw(walls[i]);
   }
-
-
-
+ for (int i = 0; i < food.size(); ++i) {
+    window.draw(food[i]);
+  }
 
 
 
