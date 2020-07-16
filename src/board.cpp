@@ -16,6 +16,13 @@ void Board::putElement(std::deque<Point> element, Cell value) {
     mark_cell(element[i], value);
   }
 }
+void Board::putElement(std::vector<Point> element, Cell value) {
+  // TODO snake head diffenciate from body
+  for (int i=0; i < element.size(); ++i) {
+    mark_cell(element[i], value);
+  }
+}
+
 void Board::putElement(Point p, Cell value){
   mark_cell(p, value);
 }
@@ -36,4 +43,8 @@ std::vector<Point> Board::getElementPoints(Cell element) const {
 
 void Board::mark_cell(Point p, Cell v) {
   grid[p.x][p.y] = v;
+}
+
+Cell Board::getElementAt(Point p) {
+  return grid[p.x][p.y];
 }

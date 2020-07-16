@@ -179,6 +179,22 @@
   - [ ] [[file:src/game.cpp::// FIXME: make a function][draw function for repeated loops]]
   - [ ] board limits not shows in view 0 cordinates!!! 
     - en general the representaion of 0 axis are not whowed /:
+  - [ ] refactor
+    - board
+      #+begin_src c++
+        void Board::putElement(std::deque<Point> element, Cell value) {
+          // TODO snake head diffenciate from body
+          for (int i=0; i < element.size(); ++i) {
+            mark_cell(element[i], value);
+          }
+        }
+        void Board::putElement(std::vector<Point> element, Cell value) {
+          // TODO snake head diffenciate from body
+          for (int i=0; i < element.size(); ++i) {
+            mark_cell(element[i], value);
+          }
+        }
+      #+end_src
 * BUGS [0/2]
 ** TODO #001 , horizontal split and snake horizontal move delete other lines
         - this behavior was watched only one time.. 

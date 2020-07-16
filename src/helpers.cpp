@@ -116,6 +116,7 @@ void renderElements(std::vector<sf::RectangleShape>& elements, const sf::VertexA
   }
 }
 
+// FIXME: to be deleted (& in hpp)
 bool snakeOutBoard(const std::deque<Point> &snake, const std::vector<Point> board_limits) {
   // if (std::find(board_limits.begin(), board_limits.end(),snake.front()) !=  board_limits.end())
   //   return true;
@@ -131,5 +132,11 @@ bool snakeOutBoard(const std::deque<Point> &snake, const std::vector<Point> boar
       return true;
     }
   }
+  return false;
+}
+
+bool snakeCollision(Cell value) {
+  if (value != Cell::Empty)
+    return true;
   return false;
 }

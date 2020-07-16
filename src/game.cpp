@@ -11,6 +11,9 @@ Game::Game() {
   generateRandomElement(grow, board.getBoard(), sf::Vector2i {board.getWidth(),board.getHeight()});
   board_limits_points = getBoardLimitPoints(sf::Vector2i {board.getWidth(),board.getHeight()});
 
+  board.putElement(board_limits_points, Cell::Wall);
+  board.putElement(grow.points, Cell::Grow);
+
   // create window
   window.create(sf::VideoMode(400,400), "snake", sf::Style::Resize); // FIXME: video mode and title ;;
   window.setFramerateLimit(20); // FIXME:  https://www.sfml-dev.org/tutorials/2.5/window-window.ph
@@ -82,11 +85,15 @@ void Game::update() {
   // TODO test collisions..etc
   snake.render();
 
-  // test snake out of board limits
-  if(snakeOutBoard(snake.getSnake(), board_limits_points)){
-    snake.setup(3, 20, {20,20}, Direction::East); // FIXME: debug
-  }
+  // // test snake out of board limits  ;; TODO: to be deleted
+  // if(snakeOutBoard(snake.getSnake(), board_limits_points)){
+  //   snake.setup(3, 20, {20,20}, Direction::East); // FIXME: debug
+  // }
 
+  // snake collisions
+  if(snakeCollision(board.getElementAt(snake.getSnake().front()))){
+      std::cout << "collision" << "\n";
+  }
 
   // put snake into board
   // FIXME: good solution?
@@ -101,7 +108,7 @@ void Game::update() {
   board.putElement(snake.getSnake(), Cell::Body);
 
   // begin-DEBUG
-  // debug_board_printBoard(board.getBoard());
+  //debug_board_printBoard(board.getBoard());
   // end-DEBUG
 }
 

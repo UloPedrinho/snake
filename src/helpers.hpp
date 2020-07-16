@@ -44,4 +44,5 @@ void renderElements(std::vector<sf::RectangleShape>& elements, const sf::VertexA
 // collisions
 bool snakeOutBoard(const std::deque<Point>& snake, const std::vector<Point> board_limits);
 
+bool snakeCollision(Cell value);
 #endif /* HELPERS_HPP */
