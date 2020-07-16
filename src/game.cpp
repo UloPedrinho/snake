@@ -5,7 +5,7 @@ Game::Game() {
   // init game data
   board.setup(80, 80, Cell::Empty);
   snake.setup(3, 20, {20,20}, Direction::East);
-  grow.units = 32;
+  grow.units = 100;
   grow.current = 0;
   grow.type = Cell::Grow;
   generateRandomElement(grow, board.getBoard(), sf::Vector2i {board.getWidth(),board.getHeight()});
@@ -85,14 +85,21 @@ void Game::update() {
   // TODO test collisions..etc
   snake.render();
 
-  // // test snake out of board limits  ;; TODO: to be deleted
-  // if(snakeOutBoard(snake.getSnake(), board_limits_points)){
-  //   snake.setup(3, 20, {20,20}, Direction::East); // FIXME: debug
-  // }
-
   // snake collisions
-  if(snakeCollision(board.getElementAt(snake.getSnake().front()))){
-      std::cout << "collision" << "\n";
+  Cell snake_head_board_value = board.getElementAt(snake.getSnake().front());
+  if(snakeCollision(snake_head_board_value)){
+    if (snake_head_board_value == Cell::Grow) {
+      snake.grow(10);           // FIXME: make function to control current size and grow
+      grow.current += 10;
+      if (grow.current >
+          grow.units) { // FIXME: here split the snake before to be painted
+        snake.toggleSplit();
+        grow.current = 0;
+      }
+    } else if (snake_head_board_value == Cell::Wall) {
+      std::cout << "SUPERCOLLISION!!"
+                << "\n";
+    }
   }
 
   // put snake into board
@@ -118,9 +125,6 @@ void Game::render() {
   renderElements(walls, cell_points, board.getElementPoints(Cell::Wall), sf::Color::Magenta, sf::Vector2i {board.getWidth(),board.getHeight()});
   renderElements(food, cell_points, grow.points, sf::Color::Yellow, sf::Vector2i {board.getWidth(),board.getHeight()});
   renderElements(board_limits, cell_points, board_limits_points, sf::Color::Cyan, sf::Vector2i {board.getWidth(),board.getHeight()});
-
-  // renderElements(food, cell_points, {{1, 1}, {3,3}}, sf::Color::Yellow,    // FIXME: DEBUG , to be deleted
-  //                sf::Vector2i{board.getWidth(), board.getHeight()});
 }
 
 void Game::draw() {
