@@ -6,4 +6,10 @@ struct Point {
   int y;
 };
 
+
+// TODO: move to game.hpp
+enum class Cell {Empty, Wall, Snake_head, Snake_body, food};
+enum class Direction {North, South, East, West};
+
+
 #endif /* HELPERS_HPP */

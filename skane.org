@@ -1,4 +1,9 @@
 #+TITLE: Snake
 #+DATE: [2020-07-16 Xov]
 
+* TODO [/]
+  - [ ] initSnake()
+    - add snake body and head points here?
+    - use another función ? 
+
 
