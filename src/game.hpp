@@ -25,5 +25,7 @@ private:
   std::vector<sf::RectangleShape> snake_body;
   std::vector<sf::RectangleShape> walls;
   std::vector<sf::RectangleShape> food ;
+  std::vector<sf::RectangleShape> board_limits ;
+  std::vector<Point> board_limits_points;
   sf::VertexArray grid;         // FIXME
 };

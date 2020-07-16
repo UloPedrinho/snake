@@ -2,6 +2,7 @@
 #define HELPERS_HPP_
 #include <SFML/Window.hpp>      // FIXME : repeating?
 #include <SFML/Graphics.hpp>    // FIXME : repeating?
+#include <algorithm>
 #include <vector>
 #include <deque>
 #include <cstdlib>
@@ -28,6 +29,9 @@ struct Items {
   std::vector<Point> points;
 };
 
+// board limits points
+std::vector<Point> getBoardLimitPoints(const sf::Vector2i board_size);
+
 // generate random elements
 void generateRandomElement(Items& element, const std::vector<std::vector<Cell>> board, const sf::Vector2i board_size);
 
@@ -37,4 +41,7 @@ sf::VertexArray cellsPoints(const sf::Vector2u window_size, const sf::Vector2i b
 void renderGrid(sf::VertexArray& grid, sf::Vector2u window_size, const sf::Vector2i board_size);
 void renderSnake(std::vector<sf::RectangleShape>& body, const sf::VertexArray& origins, const std::deque<Point> snake, const sf::Vector2i board_size);
 void renderElements(std::vector<sf::RectangleShape>& elements, const sf::VertexArray& origins,  const std::vector<Point> points, sf::Color color, const sf::Vector2i board_size);
+// collisions
+bool snakeOutBoard(const std::deque<Point>& snake, const std::vector<Point> board_limits);
+
 #endif /* HELPERS_HPP */

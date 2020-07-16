@@ -1,6 +1,20 @@
 #include "helpers.hpp"
 #include <iostream>             // FIXME
 
+std::vector<Point> getBoardLimitPoints(const sf::Vector2i board_size) {
+  std::vector<Point> points;
+  for (int i = 0; i < board_size.x; ++i) {
+    points.push_back({i, 1});
+    points.push_back({i, board_size.y - 1});
+    std::cout << i << "\n";
+  }
+  for (int i = 0; i < board_size.y; ++i) {
+    points.push_back({1, i});
+    points.push_back({board_size.x - 1, i});
+  }
+  return points;
+}
+
 void generateRandomElement(Items& element, const std::vector<std::vector<Cell>> board, const sf::Vector2i board_size) {
   srand((unsigned) time(0));    //  FIXME here or ... in main..etc?
   int randomX;
@@ -100,4 +114,22 @@ void renderElements(std::vector<sf::RectangleShape>& elements, const sf::VertexA
     cell.setFillColor(color);
     elements.push_back(cell);
   }
+}
+
+bool snakeOutBoard(const std::deque<Point> &snake, const std::vector<Point> board_limits) {
+  // if (std::find(board_limits.begin(), board_limits.end(),snake.front()) !=  board_limits.end())
+  //   return true;
+  // return false;
+  Point head = snake.front();
+  std::cout << "h: " << head.x<<"," <<head.y  << "\n";
+
+  for (const Point &p : board_limits) {
+    if (p.x == head.x && p.y == head.y) {
+
+      std::cout << "perry           ";
+      std::cout << "h: " << head.x<<"," <<head.y  << "\n";
+      return true;
+    }
+  }
+  return false;
 }

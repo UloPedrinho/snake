@@ -9,7 +9,7 @@ Game::Game() {
   grow.current = 0;
   grow.type = Cell::Grow;
   generateRandomElement(grow, board.getBoard(), sf::Vector2i {board.getWidth(),board.getHeight()});
-
+  board_limits_points = getBoardLimitPoints(sf::Vector2i {board.getWidth(),board.getHeight()});
 
   // create window
   window.create(sf::VideoMode(400,400), "snake", sf::Style::Resize); // FIXME: video mode and title ;;
@@ -81,6 +81,13 @@ void Game::update() {
 
   // TODO test collisions..etc
   snake.render();
+
+  // test snake out of board limits
+  if(snakeOutBoard(snake.getSnake(), board_limits_points)){
+    snake.setup(3, 20, {20,20}, Direction::East); // FIXME: debug
+  }
+
+
   // put snake into board
   // FIXME: good solution?
   if (snake.getSplitted()) { // snake is to be splitted
@@ -103,6 +110,7 @@ void Game::render() {
   renderSnake(snake_body, cell_points, snake.getSnake(), sf::Vector2i {board.getWidth(),board.getHeight()});
   renderElements(walls, cell_points, board.getElementPoints(Cell::Wall), sf::Color::Magenta, sf::Vector2i {board.getWidth(),board.getHeight()});
   renderElements(food, cell_points, grow.points, sf::Color::Yellow, sf::Vector2i {board.getWidth(),board.getHeight()});
+  renderElements(board_limits, cell_points, board_limits_points, sf::Color::Cyan, sf::Vector2i {board.getWidth(),board.getHeight()});
 
   // renderElements(food, cell_points, {{1, 1}, {3,3}}, sf::Color::Yellow,    // FIXME: DEBUG , to be deleted
   //                sf::Vector2i{board.getWidth(), board.getHeight()});
@@ -113,6 +121,9 @@ void Game::draw() {
 
   // FIXME: make a function
   //        better sometipe of sfml array?? and not loop
+  for (int i = 0; i < board_limits.size(); ++i) {
+    window.draw(board_limits[i]);
+  }
   for (int i = 0; i < snake_body.size(); ++i) {
     window.draw(snake_body[i]);
   }

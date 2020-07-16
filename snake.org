@@ -75,8 +75,10 @@
     - State "TODO"       from              [2020-07-14 Mar 12:41]
     :END:
     - [ ] make Game class code more clean, defining functions to snake update..etc
-** TODO control colissions
+** CURRENT control colissions
    :LOGBOOK:
+   - State "CURRENT"    from "STARTED"    [2020-07-16 Xov 10:42]
+   - State "STARTED"    from "TODO"       [2020-07-16 Xov 10:41]
    - State "TODO"       from              [2020-07-14 Mar 10:18]
    :END:
    - [ ] board limit
@@ -172,13 +174,15 @@
 ** TODO comments in files and classes
    - [ ] put comments
    - [ ] clear debug couts
-* FIXES [0/2]
+* FIXES [0/3]
   - [ ] [[file:src/game.cpp::window.setFramerateLimit(20); // FIXME: https://www.sfml-dev.org/tutorials/2.5/window-window.ph]]
   - [ ] [[file:src/game.cpp::// FIXME: make a function][draw function for repeated loops]]
-
+  - [ ] board limits not shows in view 0 cordinates!!! 
+    - en general the representaion of 0 axis are not whowed /:
 * BUGS [0/2]
 ** TODO #001 , horizontal split and snake horizontal move delete other lines
         - this behavior was watched only one time.. 
+        - it was watched again after the board outlimits.
 ** TODO #002 , cordinates with 0, are not showed. it's like start in 1
         - renderElements(food, cell_points, {{0, 0}, {1, 5}}, sf::Color::Yellow,
                         sf::Vector2i{board.getWidth(), board.getHeight()});
