@@ -21,16 +21,17 @@ void putElementsInBoard(Board& board, const std::deque<Point>& positions, Cell v
 }
 
 void cleanBoard(Board& board, Cell value){
-  for (int i = 0; i < board.height; ++i)
-    for (int j = 0; j < board.width; ++j)
+  for (int i = 0; i < board.width; ++i)
+    for (int j = 0; j < board.height; ++j)
       board.board[i][j] = value;
 }
 
 // snake helper functions
-void initSnake(Snake& snake, int init_size, Direction direction, Point head_position){
+void initSnake(Snake& snake, int init_size, int split_at, Direction direction, Point head_position){
   Point last_cell, current_cell;
 
   snake.init_size = init_size;
+  snake.split_at = split_at;
   snake.direction = direction;
   // init snake head and body
   snake.head = head_position;
@@ -65,15 +66,22 @@ void moveSnake(Snake& snake, Direction direction){
 
   snake.head = head;
   snake.body.push_front(old_head);
-  snake.body.pop_back();
+  if(snake.grow > 0)
+    --snake.grow;
+  else
+    snake.body.pop_back();
+}
+
+void growSnake(Snake& snake, int length){
+  snake.grow = length;
 }
 
 std::vector<Point> splitSnake(Snake& snake){
   std::vector<Point> tail;
   // poor vector slice. '-2' head and zero-based
-  for (int i = snake.init_size-2; i < snake.body.size(); ++i)
+  for (int i = snake.init_size-1; i < snake.body.size(); ++i)
     tail.push_back(snake.body[i]);
-  snake.body.resize(snake.init_size);
+  snake.body.resize(snake.init_size-1);
   return tail;
 }
 

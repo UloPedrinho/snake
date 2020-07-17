@@ -7,11 +7,17 @@
     - put all elemente in board
     - draw board
 
-* TODO [1/1]
-  - [X] initSnake()
-    - add snake body and head points here?
+* TODO [1/2]
+  - [X] board. done!
+  - [ ] snake
+    - [ ] grow
+    - [ ] split
+
 * dev questions [0/1]
   - [ ] cleanBoard
     - a classical loop has been used
     - but.. is there some more elegant or better performance using vector(Container) members..etc
       - use vector resize  will do it ?
+  - [ ] vector .insert(iterator, first,last)
+    - performance ?
+        
