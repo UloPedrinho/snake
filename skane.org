@@ -1,9 +1,17 @@
 #+TITLE: Snake
 #+DATE: [2020-07-16 Xov]
 
-* TODO [/]
-  - [ ] initSnake()
+* implementation
+  - use board to draw all
+    - clean board
+    - put all elemente in board
+    - draw board
+
+* TODO [1/1]
+  - [X] initSnake()
     - add snake body and head points here?
-    - use another función ? 
-
-
+* dev questions [0/1]
+  - [ ] cleanBoard
+    - a classical loop has been used
+    - but.. is there some more elegant or better performance using vector(Container) members..etc
+      - use vector resize  will do it ?

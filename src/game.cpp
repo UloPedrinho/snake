@@ -20,10 +20,37 @@ void putElementsInBoard(Board& board, const std::deque<Point>& positions, Cell v
     putElementInBoard(board, p, value);
 }
 
+void cleanBoard(Board& board, Cell value){
+  for (int i = 0; i < board.height; ++i)
+    for (int j = 0; j < board.width; ++j)
+      board.board[i][j] = value;
+}
+
 // snake helper functions
-void initSnake(Snake& snake, int init_size, Direction direction){
+void initSnake(Snake& snake, int init_size, Direction direction, Point head_position){
+  Point last_cell, current_cell;
+
   snake.init_size = init_size;
   snake.direction = direction;
+  // init snake head and body
+  snake.head = head_position;
+  last_cell = head_position;
+
+
+  for (int i = 0; i < (snake.init_size-1); ++i) {
+    if (snake.direction == Direction::North)
+      current_cell = {last_cell.x, last_cell.y+1};
+    else if (direction == Direction::South)
+      current_cell = {last_cell.x, last_cell.y-1};
+    else if (direction == Direction::East)
+      current_cell = {last_cell.x-1, last_cell.y};
+    else
+      current_cell = {last_cell.x+1, last_cell.y};
+
+    snake.body.push_back(current_cell);
+    last_cell = current_cell;
+  }
+
 }
 
 void moveSnake(Snake& snake, Direction direction){
@@ -42,6 +69,7 @@ void moveSnake(Snake& snake, Direction direction){
   snake.body.push_front(old_head);
   snake.body.pop_back();
 }
+
 std::vector<Point> splitSnake(Snake& snake){
   std::vector<Point> tail;
   // poor vector slice. '-2' head and zero-based
@@ -52,3 +80,29 @@ std::vector<Point> splitSnake(Snake& snake){
 }
 
 
+// elements helper functions
+std::vector<Point> generateWall(Board& board){
+  std::vector<Point> wall;
+  for (int i = 0; i < board.height; ++i) {
+    wall.push_back({0, i});
+    wall.push_back({board.height-1, i});
+  }
+  for (int i = 0; i < board.width; ++i) {
+    wall.push_back({i, 0});
+    wall.push_back({i, board.width-1});
+  }
+  return wall;
+}
+
+Point generateItemPoint(Board& board){
+  srand((unsigned) time(0));
+  int randomX;
+  int randomY;
+
+  while (true){
+    randomX = rand() % board.width;
+    randomY = rand() % board.height;
+    if (board.board[randomX][randomY] == Cell::Empty)
+      return {randomX, randomY};
+  }
+}

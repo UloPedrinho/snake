@@ -8,7 +8,7 @@ struct Point {
 
 
 // TODO: move to game.hpp
-enum class Cell {Empty, Wall, Snake_head, Snake_body, food};
+enum class Cell {Empty, Wall, Snake_head, Snake_body, Food};
 enum class Direction {North, South, East, West};
 
 

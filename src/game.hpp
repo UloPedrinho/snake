@@ -4,6 +4,9 @@
 #include "helpers.hpp"
 #include <vector>
 #include <deque>
+#include <cstdlib>
+#include <ctime>
+
 
 struct Board {
   int width;
@@ -20,13 +23,18 @@ struct Snake {
 
 // board helper functions
 void initBoard(Board& board, int width, int height, Cell value);
+void cleanBoard(Board& board, Cell value);
 void putElementInBoard(Board& board, const Point& position, Cell value);
 void putElementsInBoard(Board& board, const std::vector<Point>& positions, Cell value);
 void putElementsInBoard(Board& board, const std::deque<Point>& positions, Cell value);
 
 // snake helper functions
-void initSnake(Snake& snake, int init_size, Direction direction);
+void initSnake(Snake& snake, int init_size, Direction direction, Point head_position);
 void moveSnake(Snake& snake, Direction direction);
 std::vector<Point> splitSnake(Snake& snake);
+
+// elements helper functions
+std::vector<Point> generateWall(Board& board);
+Point generateItemPoint(Board& board);
 
 #endif /* GAME_HPP */
