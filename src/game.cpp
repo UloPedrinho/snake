@@ -4,7 +4,7 @@
 void initBoard(Board& board, int width, int height, Cell value){
   board.width = width;
   board.height = height;
-  board.board.resize(height, std::vector<Cell> (width, value));
+  board.board.resize(width, std::vector<Cell> (height, value));
 }
 
 void putElementInBoard(Board& board, const Point& position, Cell value){
@@ -36,7 +36,6 @@ void initSnake(Snake& snake, int init_size, Direction direction, Point head_posi
   snake.head = head_position;
   last_cell = head_position;
 
-
   for (int i = 0; i < (snake.init_size-1); ++i) {
     if (snake.direction == Direction::North)
       current_cell = {last_cell.x, last_cell.y+1};
@@ -50,7 +49,6 @@ void initSnake(Snake& snake, int init_size, Direction direction, Point head_posi
     snake.body.push_back(current_cell);
     last_cell = current_cell;
   }
-
 }
 
 void moveSnake(Snake& snake, Direction direction){
@@ -83,13 +81,13 @@ std::vector<Point> splitSnake(Snake& snake){
 // elements helper functions
 std::vector<Point> generateWall(Board& board){
   std::vector<Point> wall;
-  for (int i = 0; i < board.height; ++i) {
-    wall.push_back({0, i});
-    wall.push_back({board.height-1, i});
-  }
   for (int i = 0; i < board.width; ++i) {
     wall.push_back({i, 0});
-    wall.push_back({i, board.width-1});
+    wall.push_back({i, board.height-1});
+  }
+  for (int i = 0; i < board.height; ++i) {
+    wall.push_back({0, i});
+    wall.push_back({board.width-1,i});
   }
   return wall;
 }

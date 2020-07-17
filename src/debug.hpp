@@ -5,6 +5,6 @@
 #include <vector>
 #include <iostream>
 
-void debug_printBoard(std::vector<std::vector<Cell>>);
+void debug_printBoard(std::vector<std::vector<Cell>> board, int w, int h);
 
 #endif /* DEBUG_HPP */
