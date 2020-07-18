@@ -5,8 +5,23 @@
 void cycle(Board& board, Snake& snake, std::vector<Point>& wall, Direction dir,int cycles);
 void cycle(Board& board, Snake& snake, std::vector<Point>& wall, Direction dir,int cycles){
   std::vector<Point> tail;
+
+  static bool temp {false};
+
   for (int i = 0; i < cycles; i++) {
     moveSnake(snake, dir);
+
+    // collision
+    if (collision(board, snake)){
+      std::cout << "----- collision! -----" << "\n";
+      if(board.board[snake.head.x][snake.head.y] == Cell::Food )
+        growSnake(snake, 10);
+
+      putElementInBoard(board, {7,2}, Cell::Wall);
+      temp = true;
+    }
+
+    // split
     if ((snake.body.size() + 1) >= snake.split_at) {
       tail = splitSnake(snake);
       // putElementsInBoard(board, tail, Cell::Wall);
@@ -14,10 +29,16 @@ void cycle(Board& board, Snake& snake, std::vector<Point>& wall, Direction dir,i
       snake.grow = 0;
       std::cout << "----- split : " << tail.size() << " -----" << "\n";
     }
+
     cleanBoard(board, Cell::Empty);
+    if (!temp){
+      std::cout << "----food--- \n";
+      putElementInBoard(board, {7, 2}, Cell::Food);
+    }
     putElementInBoard(board, snake.head, Cell::Snake_head);
     putElementsInBoard(board, snake.body, Cell::Snake_body);
     putElementsInBoard(board, wall, Cell::Wall);
+
     debug_printBoard(board.board, board.width, board.height);
   }
 }
@@ -45,7 +66,7 @@ int main()
   wall = generateWall(board);
 
   cycle(board, snake, wall, Direction::North, 3);
-  growSnake(snake, 20);
+  //growSnake(snake, 20);
   cycle(board, snake, wall, Direction::East, 5);
   cycle(board, snake, wall, Direction::South, 3);
   cycle(board, snake, wall, Direction::East, 5);
@@ -53,44 +74,10 @@ int main()
   cycle(board, snake, wall, Direction::East, 5);
   cycle(board, snake, wall, Direction::North, 3);
   cycle(board, snake, wall, Direction::West, 5);
-  // for (int i = 0; i < 3; ++i) {
-  // moveSnake(snake, Direction::North);
-  // cleanBoard(board, Cell::Empty);
-  // putElementInBoard(board, snake.head, Cell::Snake_head);
-  // putElementsInBoard(board, snake.body, Cell::Snake_body);
-  // putElementsInBoard(board, wall, Cell::Wall);
-  // debug_printBoard(board.board, board.width,board.height);
-  // }
-
-  // growSnake(snake, 3);
-
-  // for (int i = 0; i < 4; ++i) {
-  // moveSnake(snake, Direction::East);
-  // cleanBoard(board, Cell::Empty);
-  // putElementInBoard(board, snake.head, Cell::Snake_head);
-  // putElementsInBoard(board, snake.body, Cell::Snake_body);
-  // putElementsInBoard(board, wall, Cell::Wall);
-  // debug_printBoard(board.board, board.width,board.height);
-  // }
-
-  // // putElementsInBoard(board, wall, Cell::Wall);
-  // // putElementInBoard(board, snake.head, Cell::Snake_head);
-  // // putElementsInBoard(board, snake.body, Cell::Snake_body);
 
   // putElementInBoard(board, generateItemPoint(board), Cell::Food);
   // putElementInBoard(board, generateItemPoint(board), Cell::Food);
   // putElementInBoard(board, generateItemPoint(board), Cell::Food);
-
-
-  // // debug_printBoard(board.board, board.width,board.height);
-  // cleanBoard(board, Cell::Empty);
-  // putElementInBoard(board, snake.head, Cell::Snake_head);
-  // putElementsInBoard(board, snake.body, Cell::Snake_body);
-  // putElementsInBoard(board, wall, Cell::Wall);
-  // putElementInBoard(board, generateItemPoint(board), Cell::Food);
-  // putElementInBoard(board, generateItemPoint(board), Cell::Food);
-  // putElementInBoard(board, generateItemPoint(board), Cell::Food);
-  // debug_printBoard(board.board, board.width,board.height);
 
   return 0;
 }

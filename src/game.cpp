@@ -26,6 +26,13 @@ void cleanBoard(Board& board, Cell value){
       board.board[i][j] = value;
 }
 
+bool collision(const Board& board, const Snake& snake){
+  if (board.board[snake.head.x][snake.head.y] == Cell::Empty)
+    return false;
+  return true;
+}
+
+
 // snake helper functions
 void initSnake(Snake& snake, int init_size, int split_at, Direction direction, Point head_position){
   Point last_cell, current_cell;

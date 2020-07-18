@@ -30,6 +30,7 @@ void cleanBoard(Board& board, Cell value);
 void putElementInBoard(Board& board, const Point& position, Cell value);
 void putElementsInBoard(Board& board, const std::vector<Point>& positions, Cell value);
 void putElementsInBoard(Board& board, const std::deque<Point>& positions, Cell value);
+bool collision(const Board& board, const Snake& snake);
 
 // snake helper functions
 void initSnake(Snake& snake, int init_size, int split_at, Direction direction, Point head_position);

@@ -7,12 +7,13 @@
     - put all elemente in board
     - draw board
 
-* TODO [1/2]
+* TODO [2/2]
   - [X] board. done!
-  - [ ] snake
-    - [ ] grow
-    - [ ] split
-
+  - [X] snake
+    - [X] grow
+    - [X] split
+  - [ ] collision
+    - [ ] food
 * dev questions [0/1]
   - [ ] cleanBoard
     - a classical loop has been used
