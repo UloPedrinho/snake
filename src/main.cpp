@@ -1,6 +1,8 @@
 #include "game.hpp"
 #include "helpers.hpp"
 #include "debug.hpp"
+#include "board.hpp"
+#include "snake.hpp"
 
 void cycle(Board& board, Snake& snake, std::vector<Point>& wall, Direction dir,int cycles);
 void cycle(Board& board, Snake& snake, std::vector<Point>& wall, Direction dir,int cycles){
@@ -12,7 +14,7 @@ void cycle(Board& board, Snake& snake, std::vector<Point>& wall, Direction dir,i
     moveSnake(snake, dir);
 
     // collision
-    if (collision(board, snake)){
+    if (collision(board, snake.head)){
       std::cout << "----- collision! -----" << "\n";
       if(board.board[snake.head.x][snake.head.y] == Cell::Food )
         growSnake(snake, 10);
@@ -63,7 +65,7 @@ int main()
 
 
 
-  wall = generateWall(board);
+  wall = generateWall(board.width, board.height);
 
   cycle(board, snake, wall, Direction::North, 3);
   //growSnake(snake, 20);
