@@ -2,11 +2,10 @@
 #+DATE: [2020-07-16 Xov]
 
 * implementation
-  - use board to draw all
+  - use board to draw all ?
     - clean board
     - put all elemente in board
     - draw board
-
 * TODO [3/4]
   - [X] board
   - [X] snake
@@ -17,11 +16,11 @@
   - [-] graphical
     - [ ] Views
       - [ ] external board view padding
-    - [ ] define cells points
-      - [ ] a square
-        - side: view width / (board width + 1) 
-
-
+    - [X] define cells points
+      - [X] a square
+* TODO fixme [0/1]
+  - [ ] why recalculate every cycle the wall?
+    - put in board and paint board(?)
 * dev questions [0/1]
   - [ ] cleanBoard
     - a classical loop has been used

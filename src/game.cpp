@@ -66,18 +66,17 @@ void Game::events() {
 
 void Game::update(){
   wall_points = generateWall(board.width, board.height);
-
-  std::cout << board.width << "," << board.height << " :: " <<  wall_points.size() << " :: ";
-  for (int i = 0; i < wall_points.size() ; ++i) {
-    std::cout << wall_points[i].x << "," << wall_points[i].y;
-    std::cout << " ";
-  }
-  std::cout << "\n--------" << "\n";
-
   generateCellsPosition(wall_origins, cells_position, wall_points, {board.width,board.height});
-  std::cout << wall_origins.getVertexCount() << "\n";
-  renderElements(wall, wall_origins, cell_dimension, sf::Color::Magenta);
-  std::cout << wall.size() << "\n";
+
+
+  // std::cout << board.width << "," << board.height << " :: " <<  wall_points.size() << " :: ";
+  // for (int i = 0; i < wall_points.size() ; ++i) {
+  //   std::cout << wall_points[i].x << "," << wall_points[i].y;
+  //   std::cout << " ";
+  // }
+  // std::cout << "\n--------" << "\n";
+  // std::cout << wall_origins.getVertexCount() << "\n";
+  // std::cout << wall.size() << "\n";
 }
 
 
@@ -103,16 +102,18 @@ void Game::render(){
     grid.push_back(cell);
   }
 
-  renderElement(cell, cells_position[4].position, cell_dimension, sf::Color::Green);
+  // render wall
+  renderElements(wall, wall_origins, cell_dimension, sf::Color::Magenta);
 
-  a.setSize(cell_dimension);
-  a.setPosition(cells_position[1].position);
-  a.setFillColor(sf::Color::Red);
+  // renderElement(cell, cells_position[4].position, cell_dimension, sf::Color::Green);
 
-  b.setSize(cell_dimension);
-  b.setPosition(cells_position[18].position);
-  b.setFillColor(sf::Color::Red);
+  // a.setSize(cell_dimension);
+  // a.setPosition(cells_position[1].position);
+  // a.setFillColor(sf::Color::Red);
 
+  // b.setSize(cell_dimension);
+  // b.setPosition(cells_position[18].position);
+  // b.setFillColor(sf::Color::Red);
 
   // std::cout << grid.size() << "\n";
   // cell.setSize(cell_dimension);
@@ -151,19 +152,10 @@ void Game::render(){
 
 void Game::draw(){
   window.clear(sf::Color::White);
-  // window.setView(infoView);
-  // window.draw(b);
-  // window.draw(text);
-
-  // window.draw(r);
 
   window.setView(boardView);
-  for (int i = 0; i < grid.size(); ++i) {
+  for (int i = 0; i < grid.size(); ++i)
     window.draw(grid[i]);
-  }
-  // window.draw(a);
-  for (int i = 0; i < wall.size(); ++i) {
+  for (int i = 0; i < wall.size(); ++i)
     window.draw(wall[i]);
-  }
-
 }
