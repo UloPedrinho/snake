@@ -7,13 +7,21 @@
     - put all elemente in board
     - draw board
 
-* TODO [2/2]
-  - [X] board. done!
+* TODO [3/4]
+  - [X] board
   - [X] snake
     - [X] grow
     - [X] split
-  - [ ] collision
-    - [ ] food
+  - [X] collision
+    - [X] food
+  - [-] graphical
+    - [ ] Views
+      - [ ] external board view padding
+    - [ ] define cells points
+      - [ ] a square
+        - side: view width / (board width + 1) 
+
+
 * dev questions [0/1]
   - [ ] cleanBoard
     - a classical loop has been used
