@@ -36,6 +36,9 @@ private:
   Board board;
   Snake snake;
 
+  std::vector<Point> wall_points;
+  sf::VertexArray wall_origins;
+  std::vector<sf::RectangleShape> wall;
   sf::Vector2f cell_dimension;
 
   // begin-debug
