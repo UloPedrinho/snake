@@ -32,8 +32,10 @@ private:
   sf::RenderWindow window;
   sf::View boardView;
   sf::View infoView;
+  sf::View messageView;
   sf::FloatRect boardView_dimensions;
   sf::FloatRect infoView_dimensions;
+  sf::FloatRect messageView_dimensions;
   sf::VertexArray cells_position;
   sf::Vector2f cell_dimension;
 

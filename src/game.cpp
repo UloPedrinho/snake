@@ -7,6 +7,7 @@ Game::Game(){
   sf::Vector2f view_origin(0.01f, 0.01f);
   sf::Vector2f boardView_size(window_w*0.75f, window_h*0.99f);
   sf::Vector2f infoView_size(window_w/4, window_h);
+  sf::Vector2f messageView_size(window_w*0.50f,window_h*0.25f);
   int board_width;
   int board_height;
 
@@ -27,11 +28,16 @@ Game::Game(){
 
   // create views
   boardView_dimensions = sf::FloatRect(view_origin, boardView_size);
-  infoView_dimensions = sf::FloatRect(view_origin,infoView_size);
+  infoView_dimensions = sf::FloatRect(view_origin, infoView_size);
+  messageView_dimensions = sf::FloatRect(view_origin, infoView_size);
+
   boardView.reset(boardView_dimensions);
   infoView.reset(infoView_dimensions);
+  messageView.reset(messageView_dimensions);
+
   boardView.setViewport(sf::FloatRect(0.01f, 0.01f, 0.75f, 0.99f));
   infoView.setViewport(sf::FloatRect(0.75f, 0.f, 0.25f, 1.f));
+  messageView.setViewport(sf::FloatRect(0.25f, 0.375f, 0.50f, 0.25f));
 
   //boardView.zoom(1.1f);
 
@@ -213,6 +219,14 @@ void Game::render(){
   renderElement(snake_head_shape, snake_head_origin.position, cell_dimension, sf::Color::Green);
   renderElements(snake_body_shape, snake_body_origins, cell_dimension, sf::Color::Yellow);
 
+  // begin-debug
+  cell.setSize(sf::Vector2f{messageView_dimensions.width,
+                            messageView_dimensions.height});
+  cell.setPosition(0,0);
+  cell.setFillColor(sf::Color::Red);
+  // end-debug
+
+
 }
 
 void Game::draw(){
@@ -238,4 +252,9 @@ void Game::draw(){
   window.setView(infoView);
   window.draw(score_text);
   window.draw(lifes_text);
+
+  // messageview
+  window.setView(messageView);
+  window.draw(cell);
+
 }
