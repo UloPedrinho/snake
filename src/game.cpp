@@ -19,7 +19,7 @@ Game::Game(){
   initBoard(board, board_width, board_height, Cell::Empty);
 
   // init snake
-  initSnake(snake, 3, 10, Direction::North, {10,10}, 3);
+  initSnake(snake, 3, 30, Direction::North, {10,10}, 3);
 
   // create window
   window.create(sf::VideoMode(window_w,window_h), "snake", sf::Style::Resize); // FIXME: video mode and title ;;
@@ -48,12 +48,32 @@ Game::Game(){
   putElementsInBoard(board, wall_points, Cell::Wall);
 
   // food
-  food_default_items = 3;
+  food_default_items = 20;
   food_current_items = 0;
   for (int i = 0; i < food_default_items-food_current_items; ++i){// FIXME: snake is not in board
     putElementInBoard(board, getRandomEmptyPoint(board), Cell::Food);
     ++food_current_items;
   }
+
+  // text fonts
+  if (!score_font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf")) // FIXME: put a font in src
+    std::cout << "BAD FONT" << "\n";
+
+  if (!lifes_font.loadFromFile("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf")) // FIXME: put a font in src
+    std::cout << "BAD FONT" << "\n";
+
+  // score
+  score = 0;
+  score_text.setFont(score_font);
+  score_text.setCharacterSize(10);
+  score_text.setFillColor(sf::Color::Red);
+  score_text.setPosition(10.0, 20.0) ;
+
+  // lifes
+  lifes_text.setFont(lifes_font);
+  lifes_text.setCharacterSize(10);
+  lifes_text.setFillColor(sf::Color::Blue);
+  lifes_text.setPosition(10.0, 40.0) ;
 }
 
 void Game::run(){
@@ -117,19 +137,23 @@ void Game::update(){
   // collisions
   if (collision(board, snake.head)){
     Cell collision_object = board.board[snake.head.x][snake.head.y];
-    if(collision_object == Cell::Wall)
+    if(collision_object == Cell::Wall) {
       std::cout << "Wall collision" << "\n";
+      --snake.lifes;
+    }
     else if (collision_object == Cell::Food){
       growSnake(snake, 5);      // FIXME: magic number
       putElementInBoard(board, snake.head, Cell::Empty);
       --food_current_items;
+      score += 10;              // FIXME: score values ..etc 
     }
   }
 
   // split snake
-  if(snake.to_split){
+  if((snake.body.size()+1) > snake.split_at){
     putElementsInBoard(board, splitSnake(snake), Cell::Wall);
-    snake.to_split = false;
+    score += 50;                // FIXME: only for test purpouses
+    snake.to_split = false;     // FIXME: not used.. delete it?
   }
 
   // wall
@@ -147,7 +171,21 @@ void Game::update(){
   generateCellsPosition(snake_body_origins, cells_position, snake.body, {board.width,board.height});
   snake_head_origin = cells_position[snake.head.x + snake.head.y*board.width];
 
-  
+  // info
+  // score = 0;
+  // score_text.setFont(score_font);
+  // score_text.setCharacterSize(10);
+  // score_text.setFillColor(sf::Color::Red);
+  // score_text.setPosition(10.0, 20.0) ;
+
+  // // lifes
+  // score_text.setFont(lifes_font);
+  // score_text.setCharacterSize(10);
+  // score_text.setFillColor(sf::Color::Blue);
+  // score_text.setPosition(10.0, 40.0) ;
+
+  score_text.setString("SCORE: " + std::to_string(score));
+  lifes_text.setString("LIFES: " + std::to_string(snake.lifes));
 }
 
 
@@ -191,9 +229,13 @@ void Game::draw(){
   /// food
   for (int i = 0; i < food.size(); ++i)
     window.draw(food[i]);
-
   /// snake
   window.draw(snake_head_shape);
   for (int i = 0; i < snake_body_shape.size(); ++i)
     window.draw(snake_body_shape[i]);
+
+  // info view
+  window.setView(infoView);
+  window.draw(score_text);
+  window.draw(lifes_text);
 }

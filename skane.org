@@ -24,16 +24,20 @@
             - [X] put food into board
             - [X] test collision
             - [X] remove food from board
-      - [ ] info
-        - [ ] lifes
-        - [ ] score
+      - [-] info
+        - [X] lifes
+        - [X] score
         - [ ] states (growing, poisoned(XD))
+        - [ ] splits
+          - [ ] show message in info view.. pex: 2 seconds
   - [ ] food
     - [ ] increase speed
     - [ ] decrease speed
     - [ ] split snake
     - [ ] mortal food (ratio minimal
     - [ ] life food (ratio minimal)
+* TODO bugs [/]
+  - [ ] no collision when snake with snake (snake is not in board.. )
 * TODO fixme [0/1]
   - [ ] why recalculate every cycle the wall?
     - put in board and paint board(?)

@@ -44,7 +44,7 @@ private:
   sf::Vertex snake_head_origin;
 
   std::vector<sf::RectangleShape> wall;
-    std::vector<sf::RectangleShape> food;
+  std::vector<sf::RectangleShape> food;
   sf::RectangleShape snake_head_shape;
   std::vector<sf::RectangleShape> snake_body_shape;
 
@@ -52,12 +52,16 @@ private:
   int food_default_items;
   int food_current_items;
 
+  long score;
+  sf::Font score_font;
+  sf::Text score_text;
+  sf::Font lifes_font;
+  sf::Text lifes_text;
+
   // begin-debug
   sf::RectangleShape cell;
   std::vector<sf::RectangleShape> grid;
 
-  sf::Text text;
-  sf::Font font;
   // end-debug
 
 };

@@ -55,7 +55,6 @@ void turnSnake(Snake& snake, Direction direction){
   snake.direction = direction;
 }
 
-
 std::vector<Point> splitSnake(Snake& snake){
   std::vector<Point> tail;
   // poor vector slice. '-2' head and zero-based
