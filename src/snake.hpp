@@ -13,10 +13,11 @@ struct Snake {
   int split_at;
   int grow {0};
   std::deque<Point> body;
+  int lifes;
 };
 
 // snake helper functions
-void initSnake(Snake& snake, int init_size, int split_at, Direction direction, Point head_position);
+void initSnake(Snake& snake, int init_size, int split_at, Direction direction, Point head_position, int lifes);
 void moveSnake(Snake& snake);
 void turnSnake(Snake& snake, Direction direction);
 void growSnake(Snake& snake, int length);

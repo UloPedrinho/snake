@@ -23,11 +23,8 @@ void generateCellsPosition(sf::VertexArray& cells_position, const sf::VertexArra
 void renderElement(sf::RectangleShape& cell, sf::Vector2f cell_position, sf::Vector2f cell_dimension, sf::Color color);
 void renderElements(std::vector<sf::RectangleShape>& elements, sf::VertexArray& elements_position, sf::Vector2f element_dimension, sf::Color color);
 
-// elements helper functionsa
+// elements helper functions
 std::vector<Point> generateWall(int width, int height);
 
 
 #endif /* HELPERS_HPP */
-
-
-

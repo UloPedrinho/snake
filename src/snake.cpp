@@ -1,12 +1,13 @@
 #include "snake.hpp"
 
 // snake helper functions
-void initSnake(Snake& snake, int init_size, int split_at, Direction direction, Point head_position){
+void initSnake(Snake& snake, int init_size, int split_at, Direction direction, Point head_position, int lifes){
   Point last_cell, current_cell;
 
   snake.init_size = init_size;
   snake.split_at = split_at;
   snake.direction = direction;
+  snake.lifes = lifes;
   // init snake head and body
   snake.head = head_position;
   last_cell = head_position;

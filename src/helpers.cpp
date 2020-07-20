@@ -52,20 +52,3 @@ std::vector<Point> generateWall(int width, int height){
   }
   return wall;
 }
-
-
-// void renderElements(std::vector<sf::RectangleShape>& elements, const sf::VertexArray& origins,  const std::vector<Point> points, sf::Color color,  const sf::Vector2i board_size){
-//   sf::RectangleShape cell;
-//   int cell_pos;
-//   float cell_size = origins[0].position.x - origins[1].position.y; // FIXME: refactor code,repeated in reders functions
-//   elements.clear();
-//   for (int i = 0; i < points.size(); ++i) {
-//     cell_pos = points[i].y +
-//                points[i].x *
-//                    board_size.x; // FIXME reversed cordinates, snake class...etc
-//     cell.setSize(sf::Vector2f(cell_size, cell_size)); // FIXME
-//     cell.setPosition(origins[cell_pos].position);
-//     cell.setFillColor(color);
-//     elements.push_back(cell);
-//   }
-// }

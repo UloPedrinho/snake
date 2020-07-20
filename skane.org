@@ -6,7 +6,7 @@
     - clean board
     - put all elemente in board
     - draw board
-* TODO [3/4]
+* TODO [3/5]
   - [X] board
   - [X] snake
     - [X] grow
@@ -14,11 +14,26 @@
   - [X] collision
     - [X] food
   - [-] graphical
-    - [ ] Views
-      - [ ] external board view padding
-    - [X] define cells points
-      - [X] a square
-    - [ ] update & render elements
+    - [-] Views
+      - [X] external board view padding
+      - [X] board 
+        - [X] define cells points
+          - [X] a square
+        - [X] update & render elements
+          - [X] food
+            - [X] put food into board
+            - [X] test collision
+            - [X] remove food from board
+      - [ ] info
+        - [ ] lifes
+        - [ ] score
+        - [ ] states (growing, poisoned(XD))
+  - [ ] food
+    - [ ] increase speed
+    - [ ] decrease speed
+    - [ ] split snake
+    - [ ] mortal food (ratio minimal
+    - [ ] life food (ratio minimal)
 * TODO fixme [0/1]
   - [ ] why recalculate every cycle the wall?
     - put in board and paint board(?)

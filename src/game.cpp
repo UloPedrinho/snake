@@ -19,7 +19,7 @@ Game::Game(){
   initBoard(board, board_width, board_height, Cell::Empty);
 
   // init snake
-  initSnake(snake, 3, 10, Direction::North, {10,10});
+  initSnake(snake, 3, 10, Direction::North, {10,10}, 3);
 
   // create window
   window.create(sf::VideoMode(window_w,window_h), "snake", sf::Style::Resize); // FIXME: video mode and title ;;
@@ -47,6 +47,13 @@ Game::Game(){
   wall_points = generateWall(board.width, board.height);
   putElementsInBoard(board, wall_points, Cell::Wall);
 
+  // food
+  food_default_items = 3;
+  food_current_items = 0;
+  for (int i = 0; i < food_default_items-food_current_items; ++i){// FIXME: snake is not in board
+    putElementInBoard(board, getRandomEmptyPoint(board), Cell::Food);
+    ++food_current_items;
+  }
 }
 
 void Game::run(){
@@ -109,7 +116,14 @@ void Game::update(){
 
   // collisions
   if (collision(board, snake.head)){
-    std::cout << "collision" << "\n"; // TODO:
+    Cell collision_object = board.board[snake.head.x][snake.head.y];
+    if(collision_object == Cell::Wall)
+      std::cout << "Wall collision" << "\n";
+    else if (collision_object == Cell::Food){
+      growSnake(snake, 5);      // FIXME: magic number
+      putElementInBoard(board, snake.head, Cell::Empty);
+      --food_current_items;
+    }
   }
 
   // split snake
@@ -120,9 +134,20 @@ void Game::update(){
 
   // wall
   generateCellsPosition(wall_origins, cells_position, getElementsFromBoard(board, Cell::Wall), {board.width,board.height});
+
+  // food
+  // FIXME: repeated code (int constructor). move to a function
+  for (int i = 0; i < food_default_items-food_current_items; ++i){ // FIXME: snake is not in board
+    putElementInBoard(board, getRandomEmptyPoint(board), Cell::Food);
+    ++food_current_items;
+  }
+  generateCellsPosition(food_origins, cells_position, getElementsFromBoard(board, Cell::Food), {board.width, board.height});
+
   // snake
   generateCellsPosition(snake_body_origins, cells_position, snake.body, {board.width,board.height});
   snake_head_origin = cells_position[snake.head.x + snake.head.y*board.width];
+
+  
 }
 
 
@@ -130,17 +155,8 @@ void Game::render(){
   // FIXME: move to a function. use a grid background ?
   grid.clear();
   for (int i = 0; i < cells_position.getVertexCount(); ++i) {
-    // cell_pos = points[i].y +
-    //            points[i].x *
-    //                board_size.x; // FIXME reversed cordinates, snake
-    //                class...etc
-
     cell.setSize(cell_dimension);
     cell.setPosition(cells_position[i].position);
-
-    // cell.setSize(sf::Vector2f(cell_size, cell_size)); // FIXME
-    // cell.setPosition(origins[cell_pos].position);
-
     if (i % 2 == 0)
       cell.setFillColor(sf::Color::Black);
     else
@@ -152,6 +168,9 @@ void Game::render(){
   // render wall
   renderElements(wall, wall_origins, cell_dimension, sf::Color::Magenta);
 
+  // render food
+  renderElements(food, food_origins, cell_dimension, sf::Color::Cyan);
+
   // render snake
   renderElement(snake_head_shape, snake_head_origin.position, cell_dimension, sf::Color::Green);
   renderElements(snake_body_shape, snake_body_origins, cell_dimension, sf::Color::Yellow);
@@ -161,13 +180,19 @@ void Game::render(){
 void Game::draw(){
   window.clear(sf::Color::White);
 
+  // board view
   window.setView(boardView);
+  /// grid
   for (int i = 0; i < grid.size(); ++i)
     window.draw(grid[i]);
+  /// wall
   for (int i = 0; i < wall.size(); ++i)
     window.draw(wall[i]);
+  /// food
+  for (int i = 0; i < food.size(); ++i)
+    window.draw(food[i]);
 
-  // snake
+  /// snake
   window.draw(snake_head_shape);
   for (int i = 0; i < snake_body_shape.size(); ++i)
     window.draw(snake_body_shape[i]);
