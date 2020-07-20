@@ -19,6 +19,14 @@ void putElementsInBoard(Board& board, const std::deque<Point>& positions, Cell v
   for (const Point& p : positions)
     putElementInBoard(board, p, value);
 }
+std::vector<Point> getElementsFromBoard(Board& board, Cell value){
+  std::vector<Point> elements;
+  for (int i = 0; i < board.width; ++i)
+    for (int j = 0; j < board.height; ++j)
+      if(board.board[i][j] == value)
+        elements.push_back({i,j});
+  return elements;
+}
 
 void cleanBoard(Board& board, Cell value){
   for (int i = 0; i < board.width; ++i)

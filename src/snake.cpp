@@ -26,14 +26,14 @@ void initSnake(Snake& snake, int init_size, int split_at, Direction direction, P
   }
 }
 
-void moveSnake(Snake& snake, Direction direction){
+void moveSnake(Snake& snake){
   Point head;
   Point old_head = snake.head;
-  if (direction == Direction::North)
+  if (snake.direction == Direction::North)
     head = {old_head.x, old_head.y-1};
-  else if (direction == Direction::South)
+  else if (snake.direction == Direction::South)
     head = {old_head.x, old_head.y+1};
-  else if (direction == Direction::East)
+  else if (snake.direction == Direction::East)
     head = {old_head.x+1, old_head.y};
   else
     head = {old_head.x-1, old_head.y};
@@ -49,6 +49,11 @@ void moveSnake(Snake& snake, Direction direction){
 void growSnake(Snake& snake, int length){
   snake.grow = length;
 }
+
+void turnSnake(Snake& snake, Direction direction){
+  snake.direction = direction;
+}
+
 
 std::vector<Point> splitSnake(Snake& snake){
   std::vector<Point> tail;

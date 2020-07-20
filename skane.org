@@ -18,10 +18,12 @@
       - [ ] external board view padding
     - [X] define cells points
       - [X] a square
+    - [ ] update & render elements
 * TODO fixme [0/1]
   - [ ] why recalculate every cycle the wall?
     - put in board and paint board(?)
-* dev questions [0/1]
+  - [ ] clean code
+* dev questions [0/2]
   - [ ] cleanBoard
     - a classical loop has been used
     - but.. is there some more elegant or better performance using vector(Container) members..etc

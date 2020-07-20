@@ -10,8 +10,15 @@ void generateCellsPosition(sf::VertexArray& cells_position, const sf::VertexArra
     cells_position.append(cells_origins[index]);
   }
 }
+void generateCellsPosition(sf::VertexArray& cells_position, const sf::VertexArray& cells_origins, const std::deque<Point>& board_positions, Point board_size){
+  int index;
 
-
+  cells_position.clear();
+  for (int i = 0; i < board_positions.size(); ++i) {
+    index = board_positions[i].x + board_positions[i].y*board_size.x;
+    cells_position.append(cells_origins[index]);
+  }
+}
 
 // renderers
 void renderElement(sf::RectangleShape& cell, sf::Vector2f cell_position, sf::Vector2f cell_dimension, sf::Color color){

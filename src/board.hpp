@@ -19,6 +19,7 @@ void cleanBoard(Board& board, Cell value);
 void putElementInBoard(Board& board, const Point& position, Cell value);
 void putElementsInBoard(Board& board, const std::vector<Point>& positions, Cell value);
 void putElementsInBoard(Board& board, const std::deque<Point>& positions, Cell value);
+std::vector<Point> getElementsFromBoard(Board& board, Cell value);
 bool collision(const Board& board, Point point);
 Point getRandomEmptyPoint(Board& board);
 

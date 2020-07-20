@@ -38,8 +38,15 @@ private:
 
   std::vector<Point> wall_points;
   sf::VertexArray wall_origins;
+  sf::VertexArray snake_body_origins;
+  sf::Vertex snake_head_origin;
+
   std::vector<sf::RectangleShape> wall;
+  sf::RectangleShape snake_head_shape;
+  std::vector<sf::RectangleShape> snake_body_shape;
+
   sf::Vector2f cell_dimension;
+
 
   // begin-debug
   sf::RectangleShape cell;

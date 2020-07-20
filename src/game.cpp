@@ -11,19 +11,21 @@ Game::Game(){
   int board_height;
 
   // cell dimension alaways a square and fixed
-  cell_dimension = sf::Vector2f(20.f, 20.f);
+  cell_dimension = sf::Vector2f(8.f, 8.f);
 
+  // init board
   board_width = boardView_size.x /cell_dimension.x;
   board_height = boardView_size.y /cell_dimension.y;
   initBoard(board, board_width, board_height, Cell::Empty);
 
-  std::cout << board_width << "," << board_height << "\n";
+  // init snake
+  initSnake(snake, 3, 10, Direction::North, {10,10});
 
-
+  // create window
   window.create(sf::VideoMode(window_w,window_h), "snake", sf::Style::Resize); // FIXME: video mode and title ;;
-  window.setFramerateLimit(1); // FIXME:  https://www.sfml-dev.org/tutorials/2.5/window-window.ph
+  window.setFramerateLimit(10); // FIXME:  https://www.sfml-dev.org/tutorials/2.5/window-window.ph
 
-  // views
+  // create views
   boardView_dimensions = sf::FloatRect(view_origin, boardView_size);
   infoView_dimensions = sf::FloatRect(view_origin,infoView_size);
   boardView.reset(boardView_dimensions);
@@ -33,16 +35,17 @@ Game::Game(){
 
   //boardView.zoom(1.1f);
 
-  // cells
-  cells_position.setPrimitiveType(sf::Points);
-
-
   // cells positions
+  cells_position.setPrimitiveType(sf::Points);
   for (int i = 0; i < board.height; ++i) {
     for (int j = 0; j < board.width; ++j) {
       cells_position.append(sf::Vertex(sf::Vector2f(cell_dimension.x*j,cell_dimension.y*i)));
     }
   }
+
+  // wall
+  wall_points = generateWall(board.width, board.height);
+  putElementsInBoard(board, wall_points, Cell::Wall);
 
 }
 
@@ -61,26 +64,70 @@ void Game::events() {
   while (window.pollEvent(event)) {
     if (event.type == sf::Event::Closed)
       window.close();
+    if (event.type == sf::Event::KeyPressed) {
+      switch (event.key.code) {
+      case sf::Keyboard::Left: {
+        if (snake.direction != Direction::East)
+          turnSnake(snake, Direction::West);
+        break;
+      }
+      case sf::Keyboard::Right: {
+        if (snake.direction != Direction::West)
+          turnSnake(snake, Direction::East);
+        break;
+      }
+      case sf::Keyboard::Up: {
+        if (snake.direction != Direction::South)
+          turnSnake(snake, Direction::North);
+        break;
+      }
+      case sf::Keyboard::Down: {
+        if (snake.direction != Direction::North)
+          turnSnake(snake, Direction::South);
+        break;
+      }
+      // // debug
+      case sf::Keyboard::G: {
+        growSnake(snake, 1);
+        break;
+      }
+      case sf::Keyboard::S: {
+        snake.to_split = true;
+        break;
+      }
+
+      default:
+        break;
+      }
+    }
   }
 }
 
 void Game::update(){
-  wall_points = generateWall(board.width, board.height);
-  generateCellsPosition(wall_origins, cells_position, wall_points, {board.width,board.height});
 
+  moveSnake(snake);             // FIXME ?
 
-  // std::cout << board.width << "," << board.height << " :: " <<  wall_points.size() << " :: ";
-  // for (int i = 0; i < wall_points.size() ; ++i) {
-  //   std::cout << wall_points[i].x << "," << wall_points[i].y;
-  //   std::cout << " ";
-  // }
-  // std::cout << "\n--------" << "\n";
-  // std::cout << wall_origins.getVertexCount() << "\n";
-  // std::cout << wall.size() << "\n";
+  // collisions
+  if (collision(board, snake.head)){
+    std::cout << "collision" << "\n"; // TODO:
+  }
+
+  // split snake
+  if(snake.to_split){
+    putElementsInBoard(board, splitSnake(snake), Cell::Wall);
+    snake.to_split = false;
+  }
+
+  // wall
+  generateCellsPosition(wall_origins, cells_position, getElementsFromBoard(board, Cell::Wall), {board.width,board.height});
+  // snake
+  generateCellsPosition(snake_body_origins, cells_position, snake.body, {board.width,board.height});
+  snake_head_origin = cells_position[snake.head.x + snake.head.y*board.width];
 }
 
 
 void Game::render(){
+  // FIXME: move to a function. use a grid background ?
   grid.clear();
   for (int i = 0; i < cells_position.getVertexCount(); ++i) {
     // cell_pos = points[i].y +
@@ -105,49 +152,10 @@ void Game::render(){
   // render wall
   renderElements(wall, wall_origins, cell_dimension, sf::Color::Magenta);
 
-  // renderElement(cell, cells_position[4].position, cell_dimension, sf::Color::Green);
+  // render snake
+  renderElement(snake_head_shape, snake_head_origin.position, cell_dimension, sf::Color::Green);
+  renderElements(snake_body_shape, snake_body_origins, cell_dimension, sf::Color::Yellow);
 
-  // a.setSize(cell_dimension);
-  // a.setPosition(cells_position[1].position);
-  // a.setFillColor(sf::Color::Red);
-
-  // b.setSize(cell_dimension);
-  // b.setPosition(cells_position[18].position);
-  // b.setFillColor(sf::Color::Red);
-
-  // std::cout << grid.size() << "\n";
-  // cell.setSize(cell_dimension);
-  // cell.setPosition(40,40);
-
-  // cell.setFillColor(sf::Color::Magenta);
-
-  // a.setSize(sf::Vector2f(100.f, 100.f));
-  // a.setPosition(50,50);
-  // a.setFillColor(sf::Color::Magenta);
-  // // a.setOutlineThickness(1.f);
-  // a.setOutlineColor(sf::Color::Black);
-
-  // b.setSize(sf::Vector2f(100.f, 100.f));
-  // b.setPosition(150,49);
-
-  // // b.setOutlineThickness(1.f);
-  // b.setFillColor(sf::Color::Green);
-
-  // begin-debug
-  // r.setSize(sf::Vector2f(30,30));
-  // r.setPosition(10,10);
-  // b.setSize(sf::Vector2f(30,30));
-  // b.setPosition(20,20);
-  // r.setFillColor(sf::Color::Green);
-  // b.setFillColor(sf::Color::Blue);
-  // if (!font.loadFromFile("/usr/share/fonts/truetype/freefont/FreeSans.ttf"))
-  //   std::cout << "BAD FONT" << "\n";
-  // text.setFont(font);
-  // text.setString("snake");
-  // text.setCharacterSize(24);
-  // text.setFillColor(sf::Color::Red);
-  // text.setPosition(20.0, 20.0) ;
-  // end-debug
 }
 
 void Game::draw(){
@@ -158,4 +166,9 @@ void Game::draw(){
     window.draw(grid[i]);
   for (int i = 0; i < wall.size(); ++i)
     window.draw(wall[i]);
+
+  // snake
+  window.draw(snake_head_shape);
+  for (int i = 0; i < snake_body_shape.size(); ++i)
+    window.draw(snake_body_shape[i]);
 }
